@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Товари</title>
+  <link rel="stylesheet" href="products.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+</head>
+<body>
+  <nav>
+  <a href="index.html"><i class="fas fa-box"> Наші товари</i> </a>
+</nav>
+  <div class="product-list">
+    <div class="product">
+      <img src="imeiges/IMG_20200501_202608.jpg" alt="Товар 1" onclick="openGallery(['imeiges/IMG_20200501_202608.jpg','imeiges/IMG_20190511_195624.jpg'])">
+      <h3>Товар 1</h3>
+      <p>Ціна: 500 грн</p>
+      <button onclick="addToCart('Товар 1', 500)">Додати до кошика</button>
+    </div>
+    <div class="product">
+      <img src="imeiges/IMG_20200501_202608.jpg" alt="Товар 2" onclick="openGallery(['imeiges/IMG_20200501_202608.jpg','imeiges/IMG_20190511_195624.jpg'])">
+      <h3>Товар 2</h3>
+      <p>Ціна: 750 грн</p>
+      <button onclick="addToCart('Товар 2', 750)">Додати до кошика</button>
+    </div>
+  </div>
+
+  
+  <!-- Галерея -->
+<div id="galleryOverlay" onclick="closeGallery()"></div>
+<div id="galleryModal">
+  <img id="galleryImage" src="" alt="Фото товару">
+  <div class="gallery-controls">
+    <button onclick="prevImage()">←</button>
+    <button onclick="nextImage()">→</button>
+    <button onclick="closeGallery()">✖</button>
+  </div>
+</div>
+  
+  <!-- 🛒 Модальне вікно корзини -->
+<div id="cartModal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <h3>Ваше замовлення</h3>
+    <ul id="cartItemsList"></ul>
+    <p id="cartTotal">Ітого: 0 грн</p>
+
+    <input type="text" id="customerName" placeholder="Ім’я" required>
+    <input type="text" id="customerPhone" placeholder="Телефон (10 цифр)" required>
+    <input type="email" id="customerEmail" placeholder="Email (необов’язково)">
+
+    <select id="deliveryMethod">
+  <option value="">Оберіть доставку</option>
+  <option value="nova_poshta">Нова Пошта</option>
+  <option value="ukr_poshta">Укрпошта</option>
+  <option value="pickup">Самовивіз</option>
+</select>
+
+<div id="npOptions" style="display:none;">
+  <input type="text" id="city" placeholder="Місто">
+  <input type="text" id="warehouse" placeholder="Відділення">
+</div>
+
+    <button onclick="submitOrder()">✅ Оформити замовлення</button>
+    <button onclick="closeCart()">✖ Закрити</button>
+  </div>
+  <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout">
+  <input type="hidden" name="data" id="liqpayData">
+  <input type="hidden" name="signature" id="liqpaySignature">
+  <button type="submit" style="display:none;">Оплатити</button>
+</form>
+
+
+</div>
+
+<button id="viewCartBtn" onclick="openCart()">
+  🛒 Кошик <span id="cartCount"></span>
+</button>
+
+<script src="cart.js"></script>
+
+
+</body>
+</html>
