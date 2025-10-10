@@ -68,7 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch('http://localhost:3000/api/contact', {
+    fetch('http://localhost:3000/api/contact',{
+ 
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, message })
@@ -227,7 +228,8 @@ phoneInput.dispatchEvent(event);
 
   saveCart();
 
-  fetch('http://localhost:3000/api/order', {
+  fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev
+/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -455,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
