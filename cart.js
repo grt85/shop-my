@@ -140,8 +140,8 @@ function submitOrder() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   };
 
-  fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev
-/api/order',{
+  fetch('http://localhost:3000/api/order',{
+
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
@@ -154,7 +154,7 @@ function submitOrder() {
       alert(`Замовлення №${data.orderId || 'без номера'} оформлено!`);
 
       // ✅ Замість prepareLiqPay — викликаємо бекенд
-      fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev/generate-liqpay', {
+      fetch('http://localhost:3000/generate-liqpay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: order.total, orderId: data.orderId })
@@ -242,6 +242,7 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 // Ініціалізація
 
 updateCartCount();
+
 
 
 
