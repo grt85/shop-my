@@ -464,31 +464,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const order = {
-      name: this.name.value,
-      email: this.email.value,
-      message: this.message.value
-    };
-
-    fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev/api/order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'ngrok-skip-browser-warning': 'true'
-      },
-      body: JSON.stringify(order)
-    })
-      .then(res => res.text())
-      .then(data => {
-        console.log(data);
-        document.getElementById('successMessage').style.display = 'block';
-      })
-      .catch(err => console.error('Помилка:', err));
-  });
-});
 
 
