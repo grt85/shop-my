@@ -228,8 +228,7 @@ phoneInput.dispatchEvent(event);
 
   saveCart();
 
-  fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev
-/api/order', {
+  fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -457,6 +456,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
