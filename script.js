@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch('http://localhost:3000/api/contact',{
+    fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev/api/contact',{
  
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
@@ -242,7 +242,7 @@ phoneInput.dispatchEvent(event);
       alert(`Замовлення №${data.orderId || 'без номера'} оформлено!`);
       const total = cart.items.reduce((sum, item) => sum + item.price, 0);
 
-      fetch('http://localhost:3000/generate-liqpay', {
+      fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev/generate-liqpay', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ amount: total, orderId: data.orderId })
@@ -457,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
