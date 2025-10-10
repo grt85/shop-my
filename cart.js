@@ -140,7 +140,8 @@ function submitOrder() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   };
 
-  fetch('http://localhost:3000/api/order', {
+  fetch('https://uneloping-jeanna-erythrismal.ngrok-free.dev
+/api/order',{
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
@@ -241,4 +242,5 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 // Ініціалізація
 
 updateCartCount();
+
 
