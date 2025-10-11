@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 require('dotenv').config();
 
-const path = require('path');
+
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -266,6 +266,7 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
