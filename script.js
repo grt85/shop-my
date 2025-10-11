@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch('http://localhost:3000/api/contact',{
+    fetch('https://shop-my-86on.onrender.com/api/contact',{
 
  
   method: 'POST',
@@ -457,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
