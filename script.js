@@ -229,7 +229,7 @@ phoneInput.dispatchEvent(event);
 
   saveCart();
 
-  fetch('http://localhost:3000/api/order', {
+  fetch('https://shop-my-86on.onrender.com/api/order/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -457,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
