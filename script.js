@@ -242,7 +242,7 @@ phoneInput.dispatchEvent(event);
       alert(`Замовлення №${data.orderId || 'без номера'} оформлено!`);
       const total = cart.items.reduce((sum, item) => sum + item.price, 0);
 
-      fetch('http://localhost:3000/generate-liqpay', {
+      fetch('https://shop-my-86on.onrender.com/generate-liqpay', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ amount: total, orderId: data.orderId })
@@ -457,6 +457,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("contacts").style.display = "none";
     document.getElementById("overlay").style.display = "none";
   }
+
 
 
 
