@@ -23,14 +23,17 @@ app.get('/', (req, res) => {
 // Налаштування Nodemailer
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Пароль є' : '❌ Пароль не знайдено');
+const nodemailer = require('nodemailer');
+
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465, // или 587
+  secure: true, // true для 465, false для 587
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-
-    
-  }
+  },
+  connectionTimeout: 10000 // увеличить таймаут до 10 секунд
 });
 
 app.get('/test-email', (req, res) => {
@@ -266,6 +269,7 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
