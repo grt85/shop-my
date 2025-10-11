@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 // Налаштування Nodemailer
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Пароль є' : '❌ Пароль не знайдено');
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 
 //const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -269,6 +269,7 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
