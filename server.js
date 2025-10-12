@@ -201,7 +201,7 @@ ${itemList}
   });
 // ✅ Відповідаємо клієнту
     res.status(200).json({ success: true, orderId: newOrderId });
-});
+})
 
 // 📂 Перегляд повідомлень
 app.get('/admin/messages', (req, res) => {
@@ -264,6 +264,7 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
