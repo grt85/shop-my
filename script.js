@@ -241,7 +241,7 @@ phoneInput.dispatchEvent(event);
 
   saveCart();
 
-  fetch('http://localhost:3000/api/order', {
+  fetch('https://shop-my-86on.onrender.com'/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -516,3 +516,4 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
+
