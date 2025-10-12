@@ -145,36 +145,34 @@
   <input type="text" id="confirmPhone" placeholder="Телефон">
   <input type="email" id="confirmEmail" placeholder="Email (необов’язково)">
 
-  <select id="deliveryMethod" title="Спосіб доставки">
-    <option value="">Оберіть доставку</option>
-    <option value="nova_poshta">Нова Пошта</option>
-    <option value="ukr_poshta">Укрпошта</option>
-    <option value="pickup">Самовивіз</option>
-  </select>
-
+ <select id="deliveryMethod" title="Спосіб доставки">
+  <option value="">Оберіть доставку</option>
+  <option value="nova_poshta">Нова Пошта</option>
+  <option value="ukr_poshta">Укрпошта</option>
+  <option value="pickup">Самовивіз</option>
+</select>
   <!-- Блок Нової Пошти -->
   <div id="npDeliveryOptions" style="display:none; margin-top:10px;">
   <h4>Оберіть місто та відділення Нової Пошти</h4>
 
-  <select id="citySelect" style="width:100%; margin-bottom:10px;">
-    <option value="">Оберіть місто</option>
-    <!-- Автоматично заповнюється через JS -->
-  </select>
-
-  <select id="warehouseSelect" style="width:100%; margin-bottom:10px;">
-    <option value="">Оберіть відділення</option>
-    <!-- Автоматично заповнюється через JS -->
-  </select>
-</select>
-
-  <input type="text" id="warehouseNumber" placeholder="Номер відділення (необов’язково)" style="width:100%; margin-bottom:10px;">
+ <input type="text" id="cityInput" placeholder="Введіть місто" style="width:100%; margin-bottom:10px;">
+ <input type="text" id="warehouseInput" placeholder="Введіть відділення" style="width:100%; margin-bottom:10px;">
+<input type="text" id="warehouseNumber" placeholder="Номер відділення " style="width:100%; margin-bottom:10px;">
 </div>
+
+ 
   <!-- Форма LiqPay -->
   <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout">
     <input type="hidden" name="data" id="liqpayData">
     <input type="hidden" name="signature" id="liqpaySignature">
     <button type="submit" style="display:none;">Оплатити</button>
   </form>
+  <h4>Оберіть спосіб оплати</h4>
+<select id="paymentMethod" style="width:100%; margin-bottom:10px;">
+  <option value="">Оберіть оплату</option>
+  <option value="cod">Оплата при отриманні (післяплата)</option>
+  <option value="liqpay">Онлайн-оплата через LiqPay</option>
+</select>
 
   <button onclick="submitOrder()">Оформити замовлення</button>
 </div>
