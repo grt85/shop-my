@@ -521,5 +521,12 @@ button:hover {
     }
   }
 
-
+#npDeliveryOptions input,
+#npDeliveryOptions select {
+  pointer-events: auto;
+  opacity: 1;
+}
+#npDeliveryOptions {
+  transition: all 0.3s ease;
+}
 
