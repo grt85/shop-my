@@ -188,7 +188,7 @@ ${itemList}
 `
 };
 
-transporter.sendMail(adminMailOptions, (error, info) => {
+//transporter.sendMail(adminMailOptions, (error, info) => {
   if (error) {
     console.error('❌ Помилка надсилання адміністратору:', error);
   } else {
@@ -264,6 +264,7 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
