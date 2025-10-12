@@ -122,11 +122,16 @@ function submitOrder() {
   const phone = document.getElementById("customerPhone").value.trim();
   const email = document.getElementById("customerEmail").value.trim();
   const delivery = document.getElementById("deliveryMethod").value;
+  const payment = document.getElementById("paymentMethod")?.value || '';
   const city = document.getElementById("city")?.value.trim();
   const warehouse = document.getElementById("warehouse")?.value.trim();
 
   if (!validateOrderForm(name, phone, email, delivery, city, warehouse)) return;
 
+if (!payment) {
+  alert("Оберіть спосіб оплати.");
+  valid = false;
+}
   const order = {
     customer: {
       name,
@@ -134,7 +139,8 @@ function submitOrder() {
       email,
       delivery,
       city: delivery === "nova_poshta" ? city : null,
-      warehouse: delivery === "nova_poshta" ? warehouse : null
+      warehouse: delivery === "nova_poshta" ? warehouse : null,
+      payment
     },
     items: cart,
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -152,23 +158,25 @@ function submitOrder() {
     .then(data => {
       alert(`Замовлення №${data.orderId || 'без номера'} оформлено!`);
 
+const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
       // ✅ Замість prepareLiqPay — викликаємо бекенд
-      fetch('http://localhost:3000/generate-liqpay', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: order.total, orderId: data.orderId })
-      })
-        .then(res => res.json())
-        .then(({ data, signature }) => {
-          document.getElementById("liqpayData").value = data;
-          document.getElementById("liqpaySignature").value = signature;
-          document.querySelector("#liqpayForm button").click();
-        })
-        .catch(err => {
-          console.error('Помилка генерації LiqPay:', err);
-          alert('Не вдалося створити платіж');
-        });
-
+      if (payment === "liqpay") {
+  fetch('http://localhost:3000/generate-liqpay', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ amount: total, orderId: data.orderId })
+  })
+    .then(res => res.json())
+    .then(({ data, signature }) => {
+      document.getElementById("liqpayData").value = data;
+      document.getElementById("liqpaySignature").value = signature;
+      document.querySelector("#liqpayForm button").click();
+    })
+    .catch(err => {
+      console.error('Помилка генерації LiqPay:', err);
+      alert('Не вдалося створити платіж');
+    });
+}
       cart = [];
       saveCart();
       renderCart();
@@ -239,10 +247,4 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 });
 
 // Ініціалізація
-
 updateCartCount();
-
-
-
-
-
