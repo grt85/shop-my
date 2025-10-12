@@ -51,28 +51,35 @@
     <input type="email" id="customerEmail" placeholder="Email (необов’язково)">
 
     <select id="deliveryMethod">
-  <option value="">Оберіть доставку</option>
-  <option value="nova_poshta">Нова Пошта</option>
-  <option value="ukr_poshta">Укрпошта</option>
-  <option value="pickup">Самовивіз</option>
-</select>
+      <option value="">Оберіть доставку</option>
+      <option value="nova_poshta">Нова Пошта</option>
+      <option value="ukr_poshta">Укрпошта</option>
+      <option value="pickup">Самовивіз</option>
+    </select>
 
-<div id="npOptions" style="display:none;">
-  <input type="text" id="city" placeholder="Місто">
-  <input type="text" id="warehouse" placeholder="Відділення">
-</div>
+    <div id="npOptions" style="display:none;">
+      <input type="text" id="city" placeholder="Місто">
+      <input type="text" id="warehouse" placeholder="Відділення">
+    </div>
+
+    <h4>Оберіть спосіб оплати</h4>
+    <select id="paymentMethod" style="width:100%; margin-bottom:10px;">
+      <option value="">Оберіть оплату</option>
+      <option value="cod">Оплата при отриманні (післяплата)</option>
+      <option value="liqpay">Онлайн-оплата через LiqPay</option>
+    </select>
 
     <button onclick="submitOrder()">✅ Оформити замовлення</button>
     <button onclick="closeCart()">✖ Закрити</button>
-  </div>
-  <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout">
-  <input type="hidden" name="data" id="liqpayData">
-  <input type="hidden" name="signature" id="liqpaySignature">
-  <button type="submit" style="display:none;">Оплатити</button>
-</form>
-
-
+    
+    <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout">
+    <input type="hidden" name="data" id="liqpayData">
+    <input type="hidden" name="signature" id="liqpaySignature">
+    <button type="submit" style="display:none;">Оплатити</button>
+  </form>
 </div>
+</div>
+
 
 <button id="viewCartBtn" onclick="openCart()">
   🛒 Кошик <span id="cartCount"></span>
