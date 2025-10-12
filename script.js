@@ -241,7 +241,7 @@ phoneInput.dispatchEvent(event);
 
   saveCart();
 
-  fetch('https://shop-my-86on.onrender.com'/api/order', {
+  fetch(window.location.origin +'/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -255,7 +255,7 @@ phoneInput.dispatchEvent(event);
       const total = cart.items.reduce((sum, item) => sum + item.price, 0);
 
       if (payment === "liqpay") {
-  fetch('http://localhost:3000/generate-liqpay', {
+  fetchwindow.(window.location.origin +/generate-liqpay', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ amount: total, orderId: data.orderId })
@@ -487,5 +487,6 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
+
 
 
