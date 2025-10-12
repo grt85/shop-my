@@ -6,36 +6,21 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 require('dotenv').config();
 
-
-
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-
-
-
-
-
 // Налаштування Nodemailer
-
 console.log('EMAIL_USER:', process.env.EMAIL_USER);
 console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? '✅ Пароль є' : '❌ Пароль не знайдено');
-
 const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465, // або 587
-  secure: true, // true для 465, false для 587
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
-  },
-  connectionTimeout: 10000
-});
 
+    
+  }
+});
 
 app.get('/test-email', (req, res) => {
   const mailOptions = {
@@ -129,13 +114,17 @@ app.post('/api/order', (req, res) => {
 Дата: ${new Date().toLocaleString()}
 Ім'я: ${customer.name}
 Телефон: ${customer.phone}
-Email: ${email || 'не вказано'}
+Email: ${customer.email || 'не вказано'}
 Доставка: ${customer.delivery}
+Місто: ${customer.city || 'не вказано'}
+Відділення: ${customer.warehouse || 'не вказано'}
+Номер відділення: ${customer.warehouseNumber || 'не вказано'}
+Оплата: ${customer.payment || 'не вказано'}
 Товари:
 ${itemList}
 Ітого: ${total} грн
 ===========================\n`;
-
+ 
   fs.appendFile(path.join(__dirname, 'order.txt'), orderLog, (err) => {
     if (err) {
       console.error('Помилка запису замовлення:', err);
@@ -185,8 +174,13 @@ const adminMailOptions = {
 
 Ім'я: ${customer.name}
 Телефон: ${customer.phone}
-Email: ${email || 'не вказано'}
+Email: ${customer.email || 'не вказано'}
 Доставка: ${customer.delivery}
+Місто: ${customer.city || 'не вказано'}
+Відділення: ${customer.warehouse || 'не вказано'}
+Номер відділення: ${customer.warehouseNumber || 'не вказано'}
+Оплата: ${customer.payment || 'не вказано'}
+
 Товари:
 ${itemList}
 
@@ -270,15 +264,6 @@ app.post('/generate-liqpay', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
-
-
-
-
-
-
-
-
-
 
 
 
