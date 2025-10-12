@@ -68,9 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch('http://localhost:3000/api/contact',{
-
- 
+    fetch('http://localhost:3000/api/contact', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, message })
@@ -108,9 +106,16 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   confirmName.value = cart.customer.name || "";
   phoneInput.value = cart.customer.phone || "";
-  deliveryMethod.value = cart.customer.delivery || "";
+ // deliveryMethod.value = cart.customer.delivery || "";
   confirmEmail.value = cart.customer.email || "";
   warehouseNumber.value = cart.customer.warehouseNumber || "";
+
+
+
+
+
+
+
 
   // Примусово оновлюємо маску телефону
   const event = new Event('input', { bubbles: true });
@@ -157,9 +162,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const name = confirmName.value.trim();
   const phone = phoneInput.value.trim();
   const delivery = deliveryMethod.value;
+ const payment = document.getElementById("paymentMethod")?.value || '';
   const email = confirmEmail.value.trim();
-  const city = document.getElementById("citySelect")?.value || '';
-  const warehouse = document.getElementById("warehouseSelect")?.value || '';
+  const city = document.getElementById("cityInput")?.value.trim();
+  const warehouse = document.getElementById("warehouseInput")?.value.trim();
   const warehouseNumber = document.getElementById("warehouseNumber")?.value.trim() || '';
   const phoneDigits = phoneInput.dataset.raw || phone.replace(/\D/g, '');
  const event = new Event('input', { bubbles: true });
@@ -217,6 +223,11 @@ phoneInput.dispatchEvent(event);
     return;
   }
 
+  if (!payment) {
+  alert("Оберіть спосіб оплати.");
+  valid = false;
+}
+
   cart.customer = {
     name,
     phone,
@@ -224,12 +235,13 @@ phoneInput.dispatchEvent(event);
     email,
     city,
     warehouse,
-    warehouseNumber
+    warehouseNumber,
+    payment
   };
 
   saveCart();
 
-  fetch('https://shop-my-86on.onrender.com/api/order', {
+  fetch('http://localhost:3000/api/order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(cart)
@@ -242,23 +254,23 @@ phoneInput.dispatchEvent(event);
       alert(`Замовлення №${data.orderId || 'без номера'} оформлено!`);
       const total = cart.items.reduce((sum, item) => sum + item.price, 0);
 
-      fetch('http://localhost:3000/generate-liqpay', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ amount: total, orderId: data.orderId })
-})
-  .then(res => res.json())
-  .then(({ data, signature }) => {
-    document.getElementById("liqpayData").value = data;
-    document.getElementById("liqpaySignature").value = signature;
-    document.querySelector("#liqpayForm button").click();
+      if (payment === "liqpay") {
+  fetch('http://localhost:3000/generate-liqpay', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ amount: total, orderId: data.orderId })
   })
-  .catch(err => {
-    console.error('Помилка генерації LiqPay:', err);
-    alert('Не вдалося створити платіж');
-  });
-
-
+    .then(res => res.json())
+    .then(({ data, signature }) => {
+      document.getElementById("liqpayData").value = data;
+      document.getElementById("liqpaySignature").value = signature;
+      document.querySelector("#liqpayForm button").click();
+    })
+    .catch(err => {
+      console.error('Помилка генерації LiqPay:', err);
+      alert('Не вдалося створити платіж');
+    });
+}
       cart.items = [];
       saveCart();
       renderCart();
@@ -332,64 +344,102 @@ function closeImageModal() {
 
 
 
-// Показати поля Нової Пошти при виборі доставки
-document.getElementById("deliveryMethod").addEventListener("change", function () {
-  const npBlock = document.getElementById("npDeliveryOptions");
-  npBlock.style.display = this.value === "nova_poshta" ? "block" : "none";
-});
 
 // Завантажити відділення Нової Пошти
-document.getElementById("citySelect").addEventListener("change", function () {
-  const city = this.value;
-  fetch("https://api.novaposhta.ua/v2.0/json/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      apiKey: "ВАШ_API_КЛЮЧ",
-      modelName: "Address",
-      calledMethod: "getWarehouses",
-      methodProperties: { CityName: city }
-    })
-  })
-  .then(res => res.json())
-  .then(data => {
-    const select = document.getElementById("warehouseSelect");
-    select.innerHTML = '<option value="">Оберіть відділення</option>';
-    data.data.forEach(w => {
-      select.innerHTML += `<option value="${w.Description}">${w.Description}</option>`;
+// Показати поля Нової Пошти при виборі доставки
+
+  // Показати поля Нової Пошти при виборі доставки
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const deliverySelect = document.getElementById("deliveryMethod");
+  const npBlock = document.getElementById("npDeliveryOptions");
+
+  if (deliverySelect && npBlock) {
+    deliverySelect.addEventListener("change", function () {
+      npBlock.style.display = this.value === "nova_poshta" ? "block" : "none";
     });
-  });
+  }
 });
+function openCart() {
+  document.getElementById("cartModal").style.display = "flex";
+  renderCart();
 
-const apiKey = "ВАШ_API_КЛЮЧ"; // заміни на свій ключ
+  const deliverySelect = document.getElementById("deliveryMethod");
+  if (deliverySelect) {
+    deliverySelect.selectedIndex = 0; // вибрати перший варіант ("Оберіть доставку")
+  }
 
+  const npBlock = document.getElementById("npDeliveryOptions");
+  if (npBlock) {
+    npBlock.style.display = "none";
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Завантажити список міст
 function loadCities() {
-  fetch("https://api.novaposhta.ua/v2.0/json/", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      apiKey: apiKey,
-      modelName: "Address",
-      calledMethod: "getCities",
-      methodProperties: {}
-    })
-  })
+  fetch("/api/np/cities")
     .then(res => res.json())
     .then(data => {
       const citySelect = document.getElementById("citySelect");
       citySelect.innerHTML = '<option value="">Оберіть місто</option>';
-      data.data.forEach(city => {
-        citySelect.innerHTML += `<option value="${city.Description}">${city.Description}</option>`;
+      data.forEach(city => {
+        citySelect.innerHTML += `<option value="${city}">${city}</option>`;
       });
     })
     .catch(err => {
       console.error("Помилка завантаження міст:", err);
     });
-const warehouseNumber = document.getElementById("warehouseNumber").value.trim();
-cart.customer.warehouseNumber = warehouseNumber;
-  }
+}
 
-
+// Завантажити відділення
+document.getElementById("citySelect").addEventListener("change", function () {
+  const city = this.value;
+  fetch(`/api/np/warehouses?city=${encodeURIComponent(city)}`)
+    .then(res => res.json())
+    .then(data => {
+      const select = document.getElementById("warehouseSelect");
+      select.innerHTML = '<option value="">Оберіть відділення</option>';
+      data.forEach(w => {
+        select.innerHTML += `<option value="${w}">${w}</option>`;
+      });
+    });
+});
  
 
   // 🪟 Модальне вікно корзини
@@ -403,6 +453,7 @@ cart.customer.warehouseNumber = warehouseNumber;
       event.target.style.display = 'none';
     }
   };
+
 
 
 // ✨ Анімація додавання
@@ -461,16 +512,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.getElementById("paymentMethod").addEventListener("change", function () {
+  const liqpayButton = document.getElementById("liqpayButton");
+  liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
+});
