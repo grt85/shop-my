@@ -259,7 +259,7 @@ app.post('/generate-liqpay', (req, res) => {
 
 
 
-const fs = require('fs');
+
 const content = fs.readFileSync('messages.txt', 'utf-8');
 console.log('📩 Вміст messages.txt:\n', content);
 
@@ -290,6 +290,7 @@ app.get('/messages', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
