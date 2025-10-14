@@ -260,36 +260,10 @@ app.post('/generate-liqpay', (req, res) => {
 
 
 
-const content = fs.readFileSync('messages.txt', 'utf-8');
-console.log('📩 Вміст messages.txt:\n', content);
-
-app.get('/messages', (req, res) => {
-  const fs = require('fs');
-  try {
-    const content = fs.readFileSync('messages.txt', 'utf-8');
-    res.send(`<pre>${content}</pre>`);
-  } catch (err) {
-    res.status(500).send('Не вдалося прочитати файл');
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 });
+
 
 
 
