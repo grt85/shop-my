@@ -189,7 +189,7 @@ const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     })
     .catch(err => {
       console.error('Помилка при замовленні:', err);
-      alert('Помилка при відправці замовлення');
+      alert('замовлення оформлено, але платіж не створено.');
     });
 }
 
@@ -248,3 +248,4 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 
 // Ініціалізація
 updateCartCount();
+
