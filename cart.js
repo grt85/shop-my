@@ -193,6 +193,17 @@ const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
     });
 }
 
+function showSuccessPopup() {
+  const popup = document.getElementById('orderSuccess');
+  popup.classList.add('show');
+}
+  // Таймер: сховати через 5 секунд
+ showSuccessPopup();
+
+
+
+
+
 
 // Доставка: показати/сховати поля Нової Пошти
 document.getElementById("deliveryMethod").addEventListener("change", function () {
@@ -248,5 +259,6 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 
 // Ініціалізація
 updateCartCount();
+
 
 
