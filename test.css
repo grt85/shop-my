@@ -1,0 +1,118 @@
+
+
+/* Загальний стиль для контейнера товарів */
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Стиль для кожного товару */
+.product {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 280px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.product:hover {
+  transform: scale(1.03);
+}
+
+/* Зображення товару */
+.product img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Назва товару */
+.product h3 {
+  font-size: 1.2em;
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+/* Опис і ціна */
+.product p {
+  margin: 5px 0;
+  font-size: 0.95em;
+  color: #555;
+}
+
+/* Кнопка додавання до кошика */
+.product button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  background-color: #1b251d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product button:hover {
+  background-color: #218838;
+}
+
+@media (max-width: 600px) {
+  .product-list {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .product {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .product h3 {
+    font-size: 1.1em;
+  }
+
+  .product p {
+    font-size: 0.9em;
+  }
+
+  .product button {
+    font-size: 0.95em;
+    padding: 8px;
+  }
+}
+.product-list {
+  display: flex;
+  flex-wrap: wrap; /* дозволяє переносити товари на новий ряд при нестачі місця */
+  gap: 20px; /* відстань між товарами */
+  justify-content: center; /* вирівнювання по центру */
+  padding: 20px;
+}
+
+.product {
+  width: 250px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+@media (max-width: 600px) {
+  .product-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product {
+    width: 90%;
+  }
+}

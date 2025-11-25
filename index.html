@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <header class="site-header">
+  <img src="imeiges/логотип для магазину.png" alt="Логотип магазину" class="logo">
+  <h1>Ласкаво просимо до магазину</h1>
+</header>
+
+  <nav style="display:flex; gap:20px; padding:10px;">
+    <a href="#"><i class="fas fa-home"></i> Головна</a>
+    <a href="products.html"><i class="fas fa-box"></i> Товари</a>
+    <a href="#" onclick="showContacts()"><i class="fas fa-envelope"></i> Контакти</a>
+  </nav>
+
+  <!-- Модальне вікно контактів -->
+  <div id="overlay" onclick="hideContacts()"></div>
+  <div id="contacts">
+    <div class="modal-content">
+      <h2>Менеджер</h2>
+      <p>📞 Телефон: +380 668443598</p>
+      <p>📧 Email: fffvladimir952@gmail.com</p>
+      <p>📍 Адреса: м. Миколаїв, Україна</p>
+      <button onclick="hideContacts()">Закрити</button>
+    </div>
+  </div>
+
+  <main>
+    <h2>Популярні товари</h2>
+    <div class="product-grid">
+      <!-- Унікальні товари -->
+      <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пральна машина LG" onclick="openImageModal(this.src)">
+        <h3>Пральна машина LG</h3>
+        <p>Інверторна пральна машина. Ціна: 13 999 грн</p>
+        <button onclick="addToCart('Пральна машина LG', 13999, event)">Додати до кошика</button>
+      </div>
+      <div class="product">
+        <img src="imeiges/thumbnail_1763380142536.jpg" alt="Електрочайник Philips" onclick="openImageModal(this.src)">
+        <h3>Електрочайник Philips</h3>
+        <p>Потужність 2200 Вт, об'єм 1.7 л. Ціна: 800 грн</p>
+        <button onclick="addToCart('Електрочайник Philips', 800, event)">Додати до кошика</button>
+      </div>
+      <div class="product">
+        <img src="imeiges/judo-307857_1280.webp" alt="Мікрохвильова піч Samsung" onclick="openImageModal(this.src)">
+        <h3>Мікрохвильова піч Samsung</h3>
+        <p>Об'єм 23 л, гриль. Ціна: 2 999 грн</p>
+        <button onclick="addToCart('Мікрохвильова піч Samsung', 2999, event)">Додати до кошика</button>
+      </div>
+      <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пилосос Xiaomi" onclick="openImageModal(this.src)">
+        <h3>Пилосос Xiaomi</h3>
+        <p>Бездротовий, циклонний. Ціна: 4 500 грн</p>
+        <button onclick="addToCart('Пилосос Xiaomi', 4500, event)">Додати до кошика</button>
+      </div>
+      <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Праска Tefal" onclick="openImageModal(this.src)">
+        <h3>Праска Tefal</h3>
+        <p>Паровий удар 180 г/хв. Ціна: 1 200 грн</p>
+        <button onclick="addToCart('Праска Tefal', 1200, event)">Додати до кошика</button>
+      </div>
+
+       <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Праска Tefal" onclick="openImageModal(this.src)">
+        <h3>Праска Tefal</h3>
+        <p>Паровий удар 180 г/хв. Ціна: 1 200 грн</p>
+        <button onclick="addToCart('Праска Tefal', 1200, event)">Додати до кошика</button>
+      </div>
+
+       <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пилосос Xiaomi" onclick="openImageModal(this.src)">
+        <h3>Пилосос Xiaomi</h3>
+        <p>Бездротовий, циклонний. Ціна: 4 500 грн</p>
+        <button onclick="addToCart('Пилосос Xiaomi', 4500, event)">Додати до кошика</button>
+      </div>
+
+       <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пилосос Xiaomi" onclick="openImageModal(this.src)">
+        <h3>Пилосос Xiaomi</h3>
+        <p>Бездротовий, циклонний. Ціна: 4 500 грн</p>
+        <button onclick="addToCart('Пилосос Xiaomi', 4500, event)">Додати до кошика</button>
+      </div>
+
+       <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пилосос Xiaomi" onclick="openImageModal(this.src)">
+        <h3>Пилосос Xiaomi</h3>
+        <p>Бездротовий, циклонний. Ціна: 4 500 грн</p>
+        <button onclick="addToCart('Пилосос Xiaomi', 4500, event)">Додати до кошика</button>
+      </div>
+
+       <div class="product">
+        <img src="imeiges/IMG_20200511_161659.jpg" alt="Пилосос Xiaomi" onclick="openImageModal(this.src)">
+        <h3>Пилосос Xiaomi</h3>
+        <p>Бездротовий, циклонний. Ціна: 4 500 грн</p>
+        <button onclick="addToCart('Пилосос Xiaomi', 4500, event)">Додати до кошика</button>
+      </div>
+    </div>
+
+    <!-- Форма зворотного зв’язку -->
+    <form id="contactForm">
+      <h3>Зв'язатися з нами</h3>
+      <input type="text" name="name" placeholder="Ваше ім’я" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="message" placeholder="Повідомлення" required></textarea>
+      <button type="submit">Надіслати</button>
+    </form>
+    <div id="successMessage" class="success-message">Дякуємо! Повідомлення надіслано.</div>
+  </main>
+
+  <!-- Кошик -->
+  <div id="floatingCart">
+    🛒 Кошик <span id="cartCount">0</span>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Магазин. Всі права захищені.</p>
+  </footer>
+
+  <!-- Модальне вікно зображення -->
+  <div id="imageModal" class="modal">
+    <span class="close" onclick="closeImageModal()">&times;</span>
+    <img id="modalImage" class="modal-img" src="" alt="Зображення">
+  </div>
+
+  <!-- Модальне вікно корзини -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCartModal()">&times;</span>
+      <h3>Ваше замовлення</h3>
+      <ul id="cartItemsModal"></ul>
+      <p id="totalPriceModal">Ітого: 0 грн</p>
+
+      <input type="text" id="confirmName" placeholder="Ім’я">
+      <input type="text" id="confirmPhone" placeholder="Телефон">
+      <input type="email" id="confirmEmail" placeholder="Email (необов’язково)">
+       
+
+
+
+      <label for="paymentMethod">Спосіб оплати</label>
+      <select id="deliveryMethod" title="Спосіб доставки">
+        <option value="">Оберіть доставку</option>
+        <option value="nova_poshta">Нова Пошта</option>
+        <option value="ukr_poshta">Укрпошта</option>
+        <option value="pickup">Самовивіз</option>
+      </select>
+
+      <div id="npDeliveryOptions" style="display:none; margin-top:10px;">
+        <h4>Оберіть місто та відділення Нової Пошти</h4>
+        <input type="text" id="cityInput" placeholder="Введіть місто">
+        <input type="text" id="warehouseInput" placeholder="Введіть відділення">
+        <input type="text" id="warehouseNumber" placeholder="Номер відділення">
+      </div>
+
+      <form id="liqpayForm" method="POST" action="https://www.liqpay.ua/api/3/checkout">
+        <input type="hidden" name="data" id="liqpayData">
+        <input type="hidden" name="signature" id="liqpaySignature">
+        <button type="submit" style="display:none;">Оплатити</button>
+      </form>
+
+      <h4>Оберіть спосіб оплати</h4>
+      <select id="paymentMethod">
+        <option value="">Оберіть оплату</option>
+        <option value="cod">Оплата при отриманні (післяплата)</option>
+        <option value="liqpay">Онлайн-оплата через LiqPay</option>
+      </select>
+
+     <button onclick="submitOrder()">✅ Оформити замовлення</button>
+    </div>
+  </div>
+
+  <!-- Анімація додавання -->
+  <div id="flyEffect"></div>
+
+  <!-- Повідомлення про успішне замовлення -->
+  <div id="orderSuccess" class="success-popup" style="display:none;">
+  Замовлення успішно оформлено! Продавець зв'яжеться з вами для уточнення деталей.
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
