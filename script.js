@@ -70,6 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
     submitBtn.disabled = true;
 
     fetch('https://shop-my-86on.onrender.com/api/contact', {
+      if (!res.ok) throw new Error("Server error: " + res.status);
+  const data = await res.json();
+
+
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, message })
@@ -241,7 +245,7 @@ window.submitOrder = async function () {
 // LiqPay
 async function handleLiqPay(orderId, total) {
   try {
-    const res = await fetch("http://localhost:3000/generate-liqpay", {
+    const res = await fetch('https://shop-my-86on.onrender.com/generate-liqpay', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total, orderId })
@@ -463,6 +467,7 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
+
 
 
 
