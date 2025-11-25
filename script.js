@@ -96,38 +96,7 @@ form.addEventListener('submit', (e) => {
     });
 });
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  submitBtn.disabled = true;
 
-  try {
-    const res = await fetch('https://shop-my-86on.onrender.com/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message })
-    });
-
-    submitBtn.disabled = false;
-
-    if (!res.ok) {
-      throw new Error("Server error: " + res.status);
-    }
-
-    const data = await res.json();
-    console.log("Відповідь сервера:", data);
-
-    successMessage.style.display = 'block';
-    form.reset();
-    setTimeout(() => {
-      successMessage.style.display = 'none';
-    }, 5000);
-
-  } catch (err) {
-    submitBtn.disabled = false;
-    console.error('Помилка:', err);
-    alert('Помилка мережі. Перевірте підключення.');
-  }
-});
 
     
 // 🛒 Робота з корзиною
@@ -501,6 +470,7 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
+
 
 
 
