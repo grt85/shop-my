@@ -144,7 +144,7 @@ function submitOrder() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   };
 
-  fetch("https://shop-my-86on.onrender.com/api/orders/api/orders", {
+  fetch("https://shop-my-86on.onrender.com/api/orders", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
@@ -241,6 +241,7 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 
 // Ініціалізація
 updateCartCount();
+
 
 
 
