@@ -67,34 +67,32 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  submitBtn.disabled = true;
+    fetch('https://shop-my-86on.onrender.com/api/contact', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name, email, message })
+})
+      .then(response => {
+        submitBtn.disabled = false;
+        if (response.ok) {
+          successMessage.style.display = 'block';
+          form.reset();
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 5000);
+        } else {
+          alert('Помилка при відправці. Спробуйте пізніше.');
+        }
+      })
+      .catch(error => {
+        submitBtn.disabled = false;
+        console.error('Помилка:', error);
+        alert('Помилка мережі. Перевірте підключення.');
+      });
+  });
 
-  fetch('https://shop-my-86on.onrender.com/api/contact', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name, email, message })
-  })
-    .then(response => {
-      submitBtn.disabled = false;
-      if (response.ok) {
-        successMessage.style.display = 'block';
-        form.reset();
-        setTimeout(() => {
-          successMessage.style.display = 'none';
-        }, 5000);
-      } else {
-        alert('Помилка при відправці. Спробуйте пізніше.');
-      }
-    })
-    .catch(error => {
-      submitBtn.disabled = false;
-      console.error('Помилка:', error);
-      alert('Помилка мережі. Перевірте підключення.');
-    });
-});
 
 
 
@@ -470,6 +468,7 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
+
 
 
 
