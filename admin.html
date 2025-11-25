@@ -559,7 +559,7 @@ body.login-active {
   
  <script>
   const CONFIG = {
-  API_URL: 'http://localhost:3000/admin/orders'
+  API_URL: "https://shop-my-86on.onrender.com/api/orders"
 };
 
 
@@ -573,7 +573,7 @@ body.login-active {
   const password = document.getElementById('password').value.trim();
 
   try {
-    const res = await fetch('http://localhost:3000/api/admin/login', {
+    const res = await fetch("https://shop-my-86on.onrender.com/api/orders/api/admin/login", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
@@ -946,4 +946,5 @@ const toggleSelectAll = (checked) => {
     cb.checked = checked;
   });
 };
+
 </script>
