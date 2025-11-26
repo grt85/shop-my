@@ -28,13 +28,13 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // ===== Nodemailer =====
-const transporter = nodemailer.createTransport({
+/*const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
-});
+});*/
 
 // ===== Helpers =====
 const ordersFile = path.join(__dirname, 'orders.json');
@@ -172,7 +172,7 @@ Email: ${newOrder.email}
   }
 
   // Email клієнту
-  try {
+ /* try {
     if (customer.email) {
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
@@ -183,10 +183,10 @@ Email: ${newOrder.email}
     }
   } catch (err) {
     console.error("Помилка надсилання email клієнту:", err);
-  }
+  }*/
 
   // Email адміністратору
-  try {
+ /* try {
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -195,7 +195,7 @@ Email: ${newOrder.email}
     });
   } catch (err) {
     console.error("Помилка надсилання адміністратору:", err);
-  }
+  }*/
 
   res.status(200).json({ success: true, orderId: newOrderId });
 });
@@ -249,4 +249,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
 
 });
+
 
