@@ -132,6 +132,7 @@ function submitOrder() {
   const warehouse = document.getElementById("warehouse")?.value.trim();
   const warehouseNumber = document.getElementById("warehouseNumber")?.value.trim();
 
+  
   if (!validateOrderForm(name, phone, email, delivery, city, warehouse)) return;
   if (!payment) {
     alert("Оберіть спосіб оплати.");
@@ -144,7 +145,7 @@ function submitOrder() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   };
 
-  fetch("https://shop-my-86on.onrender.com/api/orders", {
+  fetch('http://localhost:3000/api/orders', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
@@ -168,11 +169,11 @@ function submitOrder() {
       document.getElementById("cartModal").style.display = 'none';
 
       // Повідомлення про успіх
-      const orderSuccess = document.getElementById("orderSuccess");
-      if (orderSuccess) {
-        orderSuccess.style.display = 'block';
+      const orderSuccesss = document.getElementById("orderSuccesss");
+      if (orderSuccesss) {
+        orderSuccesss.style.display = 'block';
         setTimeout(() => {
-          orderSuccess.style.display = 'none';
+          orderSuccesss.style.display = 'none';
         }, 9000);
       }
     })
@@ -241,7 +242,6 @@ document.getElementById("galleryModal").addEventListener("touchend", e => {
 }, { passive: true });
 // Ініціалізація
 updateCartCount();
-
 
 
 
