@@ -195,8 +195,8 @@ Email: ${newOrder.email}
     });
   } catch (err) {
     console.error("Помилка надсилання адміністратору:", err);
-  }*/
-
+  }
+*/
   res.status(200).json({ success: true, orderId: newOrderId });
 });
 
@@ -239,7 +239,10 @@ app.delete('/admin/orders/:id', authMiddleware, async (req, res) => {
 
 
 
-
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({ success: false, message: "Server error" });
+});
 
 
 
@@ -247,7 +250,4 @@ app.delete('/admin/orders/:id', authMiddleware, async (req, res) => {
 // 🚀 Запуск сервера
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
-
 });
-
-
