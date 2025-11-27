@@ -5,14 +5,10 @@ const cors = require('cors');
 const fs = require('fs').promises;
 const path = require('path');
 const nodemailer = require('nodemailer');
-const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-let orders = [
- // { id:  name: "Іван", phone: "123456789", items: "Ноутбук", total: 15000, date: "2025-11-25" },
-  //{ id:  name: "Олена", phone: "987654321", items: "Телефон", total: 8000, date: "2025-11-24" }
-];
+
 // ===== Конфіг з .env =====
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
@@ -20,7 +16,7 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 // ===== Middleware =====
 app.use(cors({
-  origin: ['http://127.0.0.1:5500',"https://shop-my-86on.onrender.com/api/orders",'http://localhost:3000'],
+  origin: ['http://127.0.0.1:5500', "https://shop-my-86on.onrender.com", 'http://localhost:3000'],
   methods: ['GET','POST','PUT','DELETE'],
   allowedHeaders: ['Content-Type','Authorization']
 }));
@@ -28,13 +24,13 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // ===== Nodemailer =====
-/*const transporter = nodemailer.createTransport({
+const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
-});*/
+});
 
 // ===== Helpers =====
 const ordersFile = path.join(__dirname, 'orders.json');
@@ -52,6 +48,37 @@ async function writeOrders(orders) {
   await fs.writeFile(ordersFile, JSON.stringify(orders, null, 2));
 }
 
+// Безпечна відправка пошти
+async function safeSendMail(options) {
+  try {
+    await transporter.sendMail(options);
+    return true;
+  } catch (err) {
+    console.error("⚠️ Помилка надсилання email:", err.message);
+    return false;
+  }
+}
+
+// Красивий лог замовлення
+function logOrder(order, total, count) {
+  console.log(`
+🛒 НОВЕ ЗАМОВЛЕННЯ №${order.id}
+---------------------------------------------
+👤 Ім'я:        ${order.name}
+📞 Телефон:    ${order.phone}
+📧 Email:      ${order.email}
+📦 Доставка:   ${order.delivery}
+🏙️ Місто:      ${order.city}
+🏤 Відділення: ${order.branch} №${order.branchNumber}
+💳 Оплата:     ${order.payment}
+💰 Сума:       ${total} грн
+🛍️ Товари:     ${order.items}
+🕒 Дата:       ${order.date}
+---------------------------------------------
+📦 Всього замовлень у базі: ${count}
+  `);
+}
+
 // ===== Авторизація =====
 function authMiddleware(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -62,16 +89,16 @@ function authMiddleware(req, res, next) {
 
   return res.status(403).json({ error: 'Доступ заборонено' });
 }
+
 // ===== Авторизація адміна =====
 app.post('/api/admin/login', (req, res) => {
   const { username, password } = req.body;
-
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
     return res.json({ token: ADMIN_TOKEN });
   }
-
   res.status(401).json({ error: 'Невірний логін або пароль' });
 });
+
 // ===== Маршрут для адмінки =====
 app.get('/admin/orders', authMiddleware, async (req, res) => {
   try {
@@ -105,110 +132,74 @@ Email: ${email}
     console.error('Помилка запису повідомлення:', err);
   }
 
-  try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: `Нове повідомлення від ${name}`,
-      text: `Ім'я: ${name}\nEmail: ${email}\nПовідомлення:\n${message}`
-    });
-  } catch (err) {
-    console.error('Помилка надсилання email:', err);
-  }
+  safeSendMail({
+    from: process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
+    subject: `Нове повідомлення від ${name}`,
+    text: `Ім'я: ${name}\nEmail: ${email}\nПовідомлення:\n${message}`
+  });
 
   res.status(200).json({ success: true, message: 'Повідомлення отримано!' });
 });
 
 // ===== Замовлення =====
 app.post('/api/orders', async (req, res) => {
-  const { items, customer } = req.body;
-
-  if (!items || !Array.isArray(items) || items.length === 0 || !customer?.name || !customer?.phone) {
-    return res.status(400).json({ success: false, message: 'Невірні дані замовлення' });
-  }
-
-  const newOrderId = Date.now();
-  const total = items.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
-
-  const newOrder = {
-    id: newOrderId,
-    name: customer.name,
-    phone: customer.phone,
-    email: customer.email || 'не вказано',
-    delivery: customer.delivery || 'не вказано',
-    city: customer.city || 'не вказано',
-    branch: customer.warehouse || 'не вказано',
-    branchNumber: customer.warehouseNumber || 'не вказано',
-    payment: customer.payment || 'не вказано',
-    items: items.map(i => `${i.name} — ${i.price} грн × ${i.quantity || 1}`).join(', '),
-    total: `${total} грн`,
-    date: new Date().toLocaleString(),
-    photo: 'https://via.placeholder.com/80'
-  };
-
   try {
+    const { items, customer } = req.body;
+
+    if (!items || !Array.isArray(items) || items.length === 0 || !customer?.name || !customer?.phone) {
+      return res.status(400).json({ success: false, message: 'Невірні дані замовлення' });
+    }
+
+    const newOrderId = Date.now();
+    const total = items.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
+
+    const newOrder = {
+      id: newOrderId,
+      name: customer.name,
+      phone: customer.phone,
+      email: customer.email || 'не вказано',
+      delivery: customer.delivery || 'не вказано',
+      city: customer.city || 'не вказано',
+      branch: customer.warehouse || 'не вказано',
+      branchNumber: customer.warehouseNumber || 'не вказано',
+      payment: customer.payment || 'не вказано',
+      items: items.map(i => `${i.name} — ${i.price} грн × ${i.quantity || 1}`).join(', '),
+      total: `${total} грн`,
+      date: new Date().toLocaleString(),
+      photo: 'https://via.placeholder.com/80'
+    };
+
     const orders = await readOrders();
     orders.push(newOrder);
     await writeOrders(orders);
 
-    console.log(`
-🛒 НОВЕ ЗАМОВЛЕННЯ №${newOrderId}
-Ім'я: ${newOrder.name}
-Телефон: ${newOrder.phone}
-Email: ${newOrder.email}
-Доставка: ${newOrder.delivery}
-Місто: ${newOrder.city}
-Відділення: ${newOrder.branch} №${newOrder.branchNumber}
-Оплата: ${newOrder.payment}
-Сума: ${total} грн
-Товари: ${newOrder.items}
-Дата: ${newOrder.date}
----------------------------------------------
-📦 Всього замовлень у базі: ${orders.length}
-    `);
+    // Лог у терміналі
+    logOrder(newOrder, total, orders.length);
 
-  } catch (err) {
-    console.error("Помилка запису orders.json:", err);
-  }
-
-  // Email клієнту
- /* try {
+    // Пошта клієнту
     if (customer.email) {
-      await transporter.sendMail({
+      safeSendMail({
         from: process.env.EMAIL_USER,
         to: customer.email,
         subject: 'Підтвердження замовлення',
         text: `Ваше замовлення №${newOrderId} на суму ${total} грн прийнято`
       });
     }
-  } catch (err) {
-    console.error("Помилка надсилання email клієнту:", err);
-  }*/
 
-  // Email адміністратору
- /* try {
-    await transporter.sendMail({
+    // Пошта адміністратору
+    safeSendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
       subject: `Нове замовлення від ${customer.name}`,
       text: `Замовлення №${newOrderId} на суму ${total} грн`
     });
+
+    return res.status(200).json({ success: true, orderId: newOrderId });
+
   } catch (err) {
-    console.error("Помилка надсилання адміністратору:", err);
-  }
-*/
-  res.status(200).json({ success: true, orderId: newOrderId });
-});
-
-
-
-// ===== GET всі замовлення =====
-app.get('/admin/orders', authMiddleware, async (req, res) => {
-  try {
-    const orders = await readOrders();
-    res.json(orders);
-  } catch (err) {
-    res.status(500).json({ error: "Помилка читання orders.json" });
+    console.error("❌ Помилка у /api/orders:", err);
+    return res.status(500).json({ success: false, message: "Помилка сервера" });
   }
 });
 
@@ -236,16 +227,11 @@ app.delete('/admin/orders/:id', authMiddleware, async (req, res) => {
   res.json({ message: "Order deleted" });
 });
 
-
-
-
+// ===== Error handler =====
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ success: false, message: "Server error" });
 });
-
-
-
 
 // 🚀 Запуск сервера
 app.listen(PORT, () => {
