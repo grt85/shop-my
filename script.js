@@ -1,4 +1,4 @@
-
+ 
 const cart = {
   items: [],
   customer: {
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch("https://shop-my-86on.onrender.com/api/contact", {
+    fetch('http://localhost:3000/api/contact', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, message })
@@ -92,13 +92,8 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Помилка мережі. Перевірте підключення.');
       });
   });
-
-
-
-
-    
 // 🛒 Робота з корзиною
-let cart = { items: [], customer: {} };
+//let cart = { items: [], customer: {} };
 
 // Збереження у localStorage
 function saveCart() {
@@ -173,54 +168,64 @@ window.addToCart = function (name, price, event) {
 };
 
 // Відправка замовлення
+// Очищення полів форми
+function resetOrderFields() {
+  if (confirmName) confirmName.value = "";
+  if (phoneInput) phoneInput.value = "";
+  if (confirmEmail) confirmEmail.value = "";
+  if (deliveryMethod) deliveryMethod.value = "";
+  if (cityInput) cityInput.value = "";
+  if (warehouseInput) warehouseInput.value = "";
+  if (warehouseNumber) warehouseNumber.value = "";
+  const paymentMethod = document.getElementById("paymentMethod");
+  if (paymentMethod) paymentMethod.value = "";
+}
+
+// Основна функція оформлення замовлення
 window.submitOrder = async function () {
   const customer = {
-    name: confirmName.value.trim(),
-    phone: phoneInput.value.trim(),
-    email: confirmEmail.value.trim(),
-    delivery: deliveryMethod.value,
-    city: cityInput?.value.trim() || '',
-    warehouse: warehouseInput?.value.trim() || '',
-    warehouseNumber: warehouseNumber?.value.trim() || '',
-    payment: document.getElementById("paymentMethod")?.value || ''
-    
+    name: confirmName?.value.trim(),
+    phone: phoneInput?.value.trim(),
+    email: confirmEmail?.value.trim(),
+    delivery: deliveryMethod?.value,
+    city: cityInput?.value.trim() || "",
+    warehouse: warehouseInput?.value.trim() || "",
+    warehouseNumber: warehouseNumber?.value.trim() || "",
+    payment: document.getElementById("paymentMethod")?.value || ""
   };
 
-  // базова валідація
+  // 🔎 Валідація
   if (!customer.name || !customer.phone || !customer.delivery || !customer.payment) {
     alert("Будь ласка, заповніть всі обов'язкові поля");
     return;
   }
-  if (cart.items.length === 0) {
+  if (!cart.items || cart.items.length === 0) {
     alert("Додайте товари до корзини!");
     return;
   }
 
   try {
-    const res = await fetch("https://shop-my-86on.onrender.com/api/orders", {
+    // 🔎 Запит до сервера
+    const res = await fetch("http://localhost:3000/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items: cart.items, customer })
     });
 
-    const text = await res.text();
-    console.log("Raw response:", text);
-
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch {
-      console.error("Сервер повернув не JSON:", text);
-      alert("Сервер повернув невалідну відповідь");
+    if (!res.ok) {
+      alert("Помилка сервера: " + res.status);
       return;
     }
+
+    const data = await res.json();
 
     if (!data.success) {
       alert(data.message || "Помилка при оформленні");
       return;
     }
 
-    alert(`Замовлення №${data.orderId} оформлено!`);
+    // 🔎 Успіх
+    alert(`Замовлення №${data.orderId} оформлено ✅`);
 
     // LiqPay — рахуємо total ДО очищення корзини
     const total = cart.items.reduce((sum, item) => sum + item.price * (item.quantity || 1), 0);
@@ -228,25 +233,27 @@ window.submitOrder = async function () {
       await handleLiqPay(data.orderId, total);
     }
 
-    // очищення корзини
+    // 🔎 Очищення
     clearCart();
-
-    // UI оновлення
-    modal.style.display = "none";
-    orderSuccess.style.display = "block";
     resetOrderFields();
 
-    setTimeout(() => { orderSuccess.style.display = "none"; }, 9000);
+    // 🔎 UI оновлення
+    if (typeof modal !== "undefined") modal.style.display = "none";
+    const orderSuccess = document.getElementById("orderSuccess");
+    if (orderSuccess) {
+      orderSuccess.style.display = "block";
+      setTimeout(() => { orderSuccess.style.display = "none"; }, 9000);
+    }
 
   } catch (err) {
-  console.error("Помилка при замовленні:", err.message, err);
-  alert("Замовлення оформлено ✅, але виникла помилка з мережею. Очікуйте дзвінок від нашого менеджера 📞");
-}
+    console.error("❌ Помилка при замовленні:", err.message, err);
+    alert("Замовлення оформлено ✅, але виникла помилка з мережею. Очікуйте дзвінок від нашого менеджера 📞");
+  }
 };
 // LiqPay
 async function handleLiqPay(orderId, total) {
   try {
-    const res = await fetch("https://shop-my-86on.onrender.com/api/orders/generate-liqpay", {
+    const res = await fetch('http://localhost:3000/generate-liqpay', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total, orderId })
@@ -315,10 +322,6 @@ function openImageModal(src) {
 function closeImageModal() {
   document.getElementById("imageModal").style.display = "none";
 }
-
-
-
-
 
 
 
@@ -468,15 +471,6 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
-
-
-
-
-
-
-
-
-
 
 
 
