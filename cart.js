@@ -144,15 +144,13 @@ function submitOrder() {
     total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   };
 
-  fetch("https://shop-my-86on.onrender.com/api/orders", {
+  fetch('http://localhost:3000/api/orders', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(order)
   })
     .then(res => {
-      if (!res.ok) {
-        throw new Error(`Помилка сервера: ${res.status}`);
-      }
+      if (!res.ok) throw new Error(`Помилка сервера: ${res.status}`);
       return res.json();
     })
     .then(data => {
@@ -171,19 +169,22 @@ function submitOrder() {
 
       // Повідомлення про успіх
       const orderSuccess = document.getElementById("orderSuccess");
-      orderSuccess.style.display = 'block';
-      setTimeout(() => {
-        orderSuccess.style.display = 'none';
-      }, 5000);
+      if (orderSuccess) {
+        orderSuccess.style.display = 'block';
+        setTimeout(() => {
+          orderSuccess.style.display = 'none';
+        }, 9000);
+      }
     })
     .catch(err => {
       console.error("❌ Помилка при замовленні:", err.message);
-      // показуємо alert тільки якщо дійсно була помилка
       alert("Замовлення оформлено ✅, але виникла помилка з мережею. Очікуйте дзвінок від нашого менеджера 📞");
     });
 }
 
 
+
+      
 
 
 
@@ -230,20 +231,16 @@ let touchStartX = 0;
 
 document.getElementById("galleryModal").addEventListener("touchstart", e => {
   touchStartX = e.changedTouches[0].screenX;
-});
+}, { passive: true });
 
 document.getElementById("galleryModal").addEventListener("touchend", e => {
   const touchEndX = e.changedTouches[0].screenX;
   const diff = touchEndX - touchStartX;
   if (diff > 50) prevImage();
   else if (diff < -50) nextImage();
-});
-
+}, { passive: true });
 // Ініціалізація
 updateCartCount();
-
-
-
 
 
 
