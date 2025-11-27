@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const cartCount = document.getElementById('cartCount');
   const floatingCart = document.getElementById('floatingCart');
   const modal = document.getElementById('cartModal');
-  const orderSuccess = document.getElementById('orderSuccess');
+  
   const imageModal = document.getElementById('imageModal');
   const modalImg = document.getElementById('modalImage');
 
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
-    fetch("https://shop-my-86on.onrender.com/api/contact", {
+    fetch('http://localhost:3000/api/contact', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({ name, email, message })
@@ -206,7 +206,7 @@ window.submitOrder = async function () {
 
   try {
     // 🔎 Запит до сервера
-    const res = await fetch("https://shop-my-86on.onrender.com/api/orders", {
+    const res = await fetch("http://localhost:3000/api/orders", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ items: cart.items, customer })
@@ -253,7 +253,7 @@ window.submitOrder = async function () {
 // LiqPay
 async function handleLiqPay(orderId, total) {
   try {
-    const res = await fetch("https://shop-my-86on.onrender.com/api/ogenerate-liqpay", {
+    const res = await fetch('http://localhost:3000/generate-liqpay', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ amount: total, orderId })
@@ -471,7 +471,6 @@ document.getElementById("paymentMethod").addEventListener("change", function () 
   const liqpayButton = document.getElementById("liqpayButton");
   liqpayButton.style.display = this.value === "liqpay" ? "inline-block" : "none";
 });
-
 
 
 
