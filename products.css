@@ -335,22 +335,19 @@ nav a:hover {
 }
 
 
-
-
 .success-popup {
-      visibility: hidden;
-      opacity: 0;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #4caf50;
-      color: white;
-      padding: 15px 20px;
-      border-radius: 5px;
-      z-index: 1000;
-      transform: translateY(20px);
-      transition: opacity 0.5s, transform 0.5s, visibility 0.5s;
-    }
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4caf50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  z-index: 9999;
+}
+
+
 
     .success-popup.show {
       visibility: visible;
