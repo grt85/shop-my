@@ -17,7 +17,7 @@ const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 app.use(cors({
   origin: [
     'http://127.0.0.1:5500',
-    'http://localhost:5500',
+    'https://shop-my-86on.onrender.com',
     'http://localhost:3000'
   ],
   methods: ['GET','POST','PUT','DELETE'],
@@ -362,4 +362,5 @@ app.use((err, req, res, next) => {
 // 🚀 Запуск сервера
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
+
 });
