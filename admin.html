@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін-панель замовлень</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+  <style>
+ 
+/* ===== Базові стилі ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* ===== Форма входу ===== */
+.login-box {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.login-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #222;
+  font-weight: 600;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.login-box input {
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.login-box input:focus {
+  border-color: #0078d7;
+}
+
+.login-box button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  background: #0078d7;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+  background: #005fa3;
+}
+
+#loginError {
+  text-align: center;
+  color: #d9534f;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ===== Адмін-панель ===== */
+#adminPanel {
+  background: #f9f9fb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+}
+
+.controls, .export-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input, button {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+input[type="date"], input[type="text"] {
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="date"]:focus, input[type="text"]:focus {
+  border-color: #4a90e2;
+}
+
+button {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #357ab8;
+}
+
+.delete-btn {
+  background: #d9534f;
+}
+
+.delete-btn:hover {
+  background: #b52b27;
+}
+
+.save-btn {
+  background: #28a745;
+}
+
+.save-btn:hover {
+  background: #1e7e34;
+}
+
+img {
+  max-width: 80px;
+  border-radius: 5px;
+}
+
+#ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#ordersTable th, #ordersTable td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+#ordersTable th {
+  background: #4a90e2;
+  color: #fff;
+}
+
+#ordersTable tr:nth-child(even) {
+  background: #f2f6fc;
+}
+
+#ordersTable tr:hover {
+  background: #e6f0fa;
+}
+
+/* ===== Адаптивність ===== */
+@media (max-width: 768px) {
+  .controls, .export-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  input, button {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  #ordersTable th, #ordersTable td {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  img {
+    max-width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  .login-box {
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .login-box h2 {
+    font-size: 20px;
+  }
+
+  .login-box input, .login-box button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #ordersTable, .controls, .export-buttons {
+    font-size: 13px;
+  }
+
+  #ordersTable th, #ordersTable td {
+    padding: 6px;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+/* ===== Базові стилі ===== */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f0f2f5;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  min-height: 100vh;
+  display: block; /* прибрали flex для всього body */
+}
+
+/* Центрування тільки для login-box */
+body.login-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== Форма входу ===== */
+.login-box {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  margin: auto;
+}
+
+/* ===== Адмін-панель ===== */
+#adminPanel {
+  background: #f9f9fb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+  max-width: 1200px;
+  margin: 20px auto;
+  overflow-x: auto;   /* горизонтальна прокрутка */
+  overflow-y: auto;   /* вертикальна прокрутка */
+}
+
+/* ===== Кнопки та інше залишаються як було ===== */
+.controls, .export-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+
+
+/* Стандартна таблиця */
+#ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#ordersTable th, #ordersTable td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+#ordersTable th {
+  background: #4a90e2;
+  color: #fff;
+}
+
+/* 📱 Адаптивність: перетворення у картки */
+@media (max-width: 768px) {
+  #ordersTable, #ordersTable thead, #ordersTable tbody, #ordersTable th, #ordersTable td, #ordersTable tr {
+    display: block;
+    width: 100%;
+  }
+
+  #ordersTable thead {
+    display: none; /* приховуємо заголовки */
+  }
+
+  #ordersTable tr {
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 10px;
+  }
+
+  #ordersTable td {
+    text-align: left;
+    border: none;
+    padding: 8px;
+    position: relative;
+  }
+
+  #ordersTable td::before {
+    content: attr(data-label); /* показує назву колонки */
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #4a90e2;
+  }
+}
+@media (max-width: 768px) {
+  #ordersTable, #ordersTable thead, #ordersTable tbody, #ordersTable th, #ordersTable td, #ordersTable tr {
+    display: block;
+    width: 100%;
+  }
+
+  #ordersTable thead {
+    display: none; /* приховуємо заголовки */
+  }
+
+  #ordersTable tr {
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #ordersTable tr:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  #ordersTable td {
+    text-align: left;
+    border: none;
+    padding: 8px 0;
+    position: relative;
+  }
+
+  #ordersTable td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #4a90e2;
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* Фото у картці */
+  #ordersTable td img {
+    max-width: 100px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  /* Кнопки дій */
+  .save-btn, .delete-btn {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .save-btn {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .save-btn:hover {
+    background: #1e7e34;
+  }
+
+  .delete-btn {
+    background: #d9534f;
+    color: #fff;
+  }
+
+  .delete-btn:hover {
+    background: #b52b27;
+  }
+}
+
+@media (max-width: 768px) {
+  #ordersTable tr {
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 15px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-left: 6px solid transparent; /* акцентна лінія */
+  }
+
+  #ordersTable tr:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+
+  /* Статуси */
+  #ordersTable tr.status-paid {
+    border-left-color: #28a745; /* зелений */
+  }
+
+  #ordersTable tr.status-pending {
+    border-left-color: #ffc107; /* жовтий */
+  }
+
+  #ordersTable tr.status-cancelled {
+    border-left-color: #dc3545; /* червоний */
+  }
+
+  /* Текст статусу */
+  .order-status {
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .order-status.paid {
+    background: #28a745;
+    color: #fff;
+  }
+
+  .order-status.pending {
+    background: #ffc107;
+    color: #333;
+  }
+
+  .order-status.cancelled {
+    background: #dc3545;
+    color: #fff;
+  }
+}
+  </style>
+</head>
+<body>
+
+<!-- Авторизація -->
+<div class="login-box" id="loginBox">
+  <h2>Вхід</h2>
+  <form onsubmit="login(); return false;">
+    <input type="text" id="username" placeholder="Логін" required autocomplete="username">
+    <input type="password" id="password" placeholder="Пароль" required autocomplete="current-password">
+    <button type="submit">Увійти</button>
+  </form>
+    <p id="loginError"></p>
+</div>
+
+
+
+<!-- Адмін-панель -->
+<div id="adminPanel">
+  <h1>Замовлення</h1>
+
+  <!-- Панель керування -->
+  <div class="controls">
+    <label for="filterDate">Фільтр за датою:</label>
+    <input type="date" id="filterDate" name="filterDate">
+    <button type="button" onclick="filterOrders()">Фільтрувати</button>
+
+    <label for="searchInput">Пошук:</label>
+    <input type="text" id="searchInput" name="searchInput" placeholder="Ім’я або телефон">
+    <button type="button" onclick="searchOrders()">Пошук</button>
+
+    <button type="button" onclick="exportToExcel()">Експортувати в Excel</button>
+    <button type="button" onclick="exportToXLSX()">Експорт у XLSX</button>
+    <button type="button" onclick="exportToPDF()">Експорт у PDF</button>
+  </div>
+
+  <!-- Форма редагування товару -->
+  <div class="edit-form">
+    <form id="editProductForm" enctype="multipart/form-data">
+      <label>Нове фото:</label>
+      <input type="file" name="imeiges"><br>
+
+      <label>Завантажити фото:</label>
+      <input type="file" id="fileInput" name="imeiges" />
+      <button type="button" onclick="uploadFile()">Завантажити</button><br>
+
+      <label>Нова ціна:</label>
+      <input type="number" name="price" step="0.01"><br>
+
+      <button type="button" onclick="updateProduct(1)">Зберегти</button>
+    </form>
+  </div>
+
+  <!-- Кнопки експорту -->
+  <div class="export-buttons">
+    <button type="button" onclick="exportToXLSX()">Експорт усіх у XLSX</button>
+    <button type="button" onclick="exportToPDF()">Експорт усіх у PDF</button>
+    <button type="button" onclick="exportToXLSX(true)">Експорт вибраних у XLSX</button>
+    <button type="button" onclick="exportToPDF(true)">Експорт вибраних у PDF</button>
+    <button type="button" onclick="toggleSelectAll(true)">Вибрати всі</button>
+    <button type="button" onclick="toggleSelectAll(false)">Зняти всі</button>
+  </div>
+
+  <!-- Таблиця замовлень -->
+  <table id="ordersTable">
+    <thead>
+      <tr>
+        <th scope="col">Фото</th>
+        <th scope="col">Ім’я</th>
+        <th scope="col">Телефон</th>
+        <th scope="col">Email</th>
+        <th scope="col">Доставка</th>
+        <th scope="col">Місто</th>
+        <th scope="col">Відділення</th>
+        <th scope="col">№ відділення</th>
+        <th scope="col">Оплата</th>
+        <th scope="col">Товари</th>
+        <th scope="col">Сума</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- рядки замовлень будуть додаватися динамічно -->
+    </tbody>
+  </table>
+</div>
+
+
+  
+ <script>
+  
+ // ===== Конфіг =====
+const CONFIG = {
+  API_URL: 'http://localhost:3000/admin/orders',
+  LOGIN_URL: 'http://localhost:3000/api/admin/login',
+  ORDER_URL: 'http://localhost:3000/api/orders'
+};
+
+let allOrders = [];
+
+// ===== Допоміжні =====
+const getToken = () => localStorage.getItem('token');
+
+const handleError = (err, errorMsg) => {
+  console.error(errorMsg, err);
+  showMessage('loginError', errorMsg, 'red');
+};
+
+const showMessage = (elementId, message, color = 'black') => {
+  const el = document.getElementById(elementId);
+  if (el) {
+    el.textContent = message;
+    el.style.color = color;
+  }
+};
+
+const showTableError = msg => {
+  document.querySelector('#ordersTable tbody').innerHTML =
+    `<tr><td colspan="13" style="color:red;text-align:center;">${msg}</td></tr>`;
+};
+
+// ===== Перевірка токена =====
+const checkToken = async () => {
+  const token = getToken();
+  if (!token) {
+    console.warn("⚠️ Токен відсутній у localStorage");
+    return;
+  }
+
+  try {
+    const res = await fetch(CONFIG.API_URL, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const data = await res.json();
+    if (res.ok && Array.isArray(data)) {
+      console.log("✅ Токен правильний, замовлення:", data.length);
+      console.log("🔑 Токен у localStorage:", token);
+    } else {
+      console.error("❌ Токен неправильний або доступ заборонено:", data);
+    }
+  } catch (err) {
+    handleError(err, "❌ Помилка перевірки токена");
+  }
+};
+
+// ===== Запити до сервера =====
+const sendRequest = async (url, method = 'GET', body = null) => {
+  const token = getToken();
+
+  const headers = {
+    ...(token && { Authorization: `Bearer ${token}` }),
+    ...(body && { 'Content-Type': 'application/json' })
+  };
+
+  const options = {
+    method,
+    headers,
+    ...(body && { body: JSON.stringify(body) })
+  };
+
+  try {
+    const res = await fetch(url, options);
+
+    console.log(`📡 Запит: ${method} ${url}`);
+    console.log("📡 Статус відповіді:", res.status);
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`HTTP ${res.status}: ${errorText}`);
+    }
+
+    const data = await res.json();
+    console.log("📦 Сирі дані з бекенду:", data);
+
+    return data;
+  } catch (err) {
+    handleError(err, "❌ Помилка у sendRequest");
+    throw err;
+  }
+};
+
+// ===== Авторизація =====
+const login = async () => {
+  const username = document.getElementById('username').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  try {
+    const res = await fetch(CONFIG.LOGIN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    });
+
+    if (!res.ok) throw new Error('Login failed');
+
+    const { token } = await res.json();
+    localStorage.setItem('token', token);
+
+    togglePanels(true);
+    await loadOrders();
+  } catch (err) {
+    handleError(err, 'Невірний логін або пароль');
+  }
+};
+
+// ===== UI =====
+const togglePanels = isLoggedIn => {
+  document.getElementById('loginBox').style.display = isLoggedIn ? 'none' : 'block';
+  document.getElementById('adminPanel').style.display = isLoggedIn ? 'block' : 'none';
+};
+// ===== Константи =====
+const ORDER_KEYS = ["photo","name","phone","email","delivery","city","branch","branchNumber","payment","items","total","date"];
+let currentPage = 1;
+const rowsPerPage = 10;
+let sortDirection = true;
+
+// ===== Завантаження замовлень =====
+async function loadOrders() {
+  try {
+    const token = getToken();
+    const res = await fetch(CONFIG.API_URL, {
+      cache: 'no-store',
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json"
+      }
+    });
+
+    if (!res.ok) throw new Error(`Помилка отримання замовлень: ${res.status}`);
+
+    const data = await res.json();
+    allOrders = Array.isArray(data) ? data : [];
+    renderPaginatedOrders(allOrders);
+    showMessage("loginError", `✅ Завантажено замовлень: ${allOrders.length}`, "green");
+  } catch (err) {
+    handleError(err, "Не вдалося завантажити замовлення ❌");
+  }
+}
+
+// ===== Рендер таблиці =====
+function renderOrders(orders) {
+  const tbody = document.querySelector("#ordersTable tbody");
+  tbody.innerHTML = "";
+
+  orders.forEach(order => {
+    const itemsHtml = Array.isArray(order.items)
+      ? order.items.map(item => `
+          <div class="order-item">
+            <img src="http://localhost:3000${item.photo}" width="80" alt="${item.name}">
+            <span>${item.name} — ${item.price} грн × ${item.quantity}</span>
+          </div>
+        `).join("")
+      : typeof order.items === "string"
+        ? `<span>${order.items}</span>`
+        : `<span>Немає даних</span>`;
+
+    tbody.innerHTML += `
+      <tr data-id="${order.id}">
+        <td>${itemsHtml}</td>
+        <td>${order.name}</td>
+        <td>${order.phone}</td>
+        <td>${order.email}</td>
+        <td>${order.delivery}</td>
+        <td>${order.city}</td>
+        <td>${order.branch}</td>
+        <td>${order.branchNumber}</td>
+        <td>${order.payment}</td>
+        <td>${order.total}</td>
+        <td>${order.date}</td>
+        <td>
+          <button onclick="editOrder('${order.id}')">Редагувати</button>
+          <button onclick="deleteOrder('${order.id}')">Видалити</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+// ===== CRUD =====
+const createOrder = async (items, customer) => {
+  try {
+    await sendRequest(CONFIG.ORDER_URL, 'POST', { items, customer });
+    showMessage('loginError', 'Замовлення створено ✅', 'green');
+    await loadOrders();
+  } catch (err) {
+    handleError(err, 'Не вдалося створити ❌');
+  }
+};
+
+// Збереження замовлення
+const saveOrder = async id => {
+  const row = document.querySelector(`#ordersTable tbody tr[data-id="${id}"]`);
+  if (!row) return;
+
+  await updateOrder(id, row, allOrders);
+};
+
+
+  
+async function updateOrder(id, row, allOrders) {
+  const updatedOrder = {
+    name: row.cells[1].textContent.trim(),
+    phone: row.cells[2].textContent.trim(),
+    email: row.cells[3].textContent.trim(),
+    delivery: row.cells[4].textContent.trim(),
+    city: row.cells[5].textContent.trim(),
+    branch: row.cells[6].textContent.trim(),
+    branchNumber: row.cells[7].textContent.trim(),
+    payment: row.cells[8].textContent.trim(),
+    total: row.cells[10].textContent.trim(),
+    date: row.cells[11].textContent.trim(),
+    photo: allOrders.find(o => String(o.id) === String(id))?.photo,
+    items: allOrders.find(o => String(o.id) === String(id))?.items || []
+  };
+
+  try {
+    await sendRequest(`${CONFIG.API_URL}/${id}`, 'PUT', updatedOrder);
+    showMessage('loginError', 'Замовлення оновлено ✅', 'green');
+    await loadOrders();
+  } catch (err) {
+    handleError(err, 'Не вдалося зберегти ❌');
+  }
+}
+
+const deleteOrder = async id => {
+  if (!confirm('Видалити замовлення?')) return;
+  try {
+    await sendRequest(`${CONFIG.API_URL}/${id}`, 'DELETE');
+    showMessage('loginError', 'Замовлення видалено 🗑️', 'green');
+    await loadOrders();
+  } catch (err) {
+    if (err.message.includes('404')) {
+      showMessage('loginError', 'Замовлення вже було видалено 🗑️', 'orange');
+      await loadOrders();
+    } else {
+      handleError(err, 'Не вдалося видалити ❌');
+    }
+  }
+};
+// ===== Завантаження файлів =====
+async function uploadFile() {
+  const fileInput = document.getElementById("fileInput");
+  if (!fileInput?.files.length) {
+    alert("Будь ласка, виберіть файл!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("imeiges", fileInput.files[0]);
+
+  try {
+    const res = await fetch("http://localhost:3000/upload", { method: "POST", body: formData });
+    if (!res.ok) throw new Error(`Помилка сервера: ${res.status}`);
+
+    const data = await res.json();
+    if (data.success && data.file?.path) {
+      alert("Фото додано ✅");
+      return data.file.path;
+    } else {
+      alert(data.message || "Помилка завантаження ❌");
+    }
+  } catch (err) {
+    console.error("❌ Помилка при завантаженні:", err);
+    alert("Не вдалося завантажити фото");
+  }
+}
+
+// ===== Сортування =====
+const sortTable = (columnIndex) => {
+  const key = ORDER_KEYS[columnIndex];
+  const sorted = [...allOrders].sort((a, b) => {
+    const valA = a[key] ?? "";
+    const valB = b[key] ?? "";
+    if (!isNaN(valA) && !isNaN(valB)) {
+      return sortDirection ? valA - valB : valB - valA;
+    }
+    return sortDirection
+      ? valA.toString().localeCompare(valB.toString())
+      : valB.toString().localeCompare(valA.toString());
+  });
+  sortDirection = !sortDirection;
+  renderPaginatedOrders(sorted);
+};
+
+document.querySelectorAll("#ordersTable th").forEach((th, index) => {
+  th.addEventListener("click", () => sortTable(index));
+});
+
+// ===== Пагінація =====
+const renderPaginatedOrders = (orders) => {
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
+  renderOrders(orders.slice(start, end));
+  renderPaginationControls(orders.length);
+};
+
+const renderPaginationControls = (totalRows) => {
+  const totalPages = Math.ceil(totalRows / rowsPerPage);
+  let controls = document.getElementById("paginationControls");
+  if (!controls) {
+    controls = document.createElement("div");
+    controls.id = "paginationControls";
+    controls.className = "pagination";
+    document.getElementById("adminPanel").appendChild(controls);
+  }
+  controls.innerHTML = `
+    <button onclick="changePage(-1)" ${currentPage === 1 ? "disabled" : ""}>Попередня</button>
+    <span>Сторінка ${currentPage} з ${totalPages}</span>
+    <button onclick="changePage(1)" ${currentPage === totalPages ? "disabled" : ""}>Наступна</button>
+  `;
+};
+
+const changePage = (direction) => {
+  const totalPages = Math.ceil(allOrders.length / rowsPerPage);
+  currentPage = Math.min(Math.max(1, currentPage + direction), totalPages);
+  renderPaginatedOrders(allOrders);
+};
+
+
+
+// ===== Оновлення суми =====
+const updateTotal = (id) => {
+  const row = document.querySelector(`#ordersTable tr[data-id="${id}"]`);
+  if (!row) return;
+  const price = parseFloat(row.querySelector(".price")?.textContent) || 0;
+  const quantity = parseInt(row.querySelector(".quantity")?.textContent) || 0;
+  const totalCell = row.querySelector(`#total-${id}`);
+  if (totalCell) totalCell.textContent = (price * quantity).toFixed(2);
+};
+
+
+// ===== Вибрати / зняти всі чекбокси =====
+const toggleSelectAll = (checked) => {
+  document.querySelectorAll('.order-checkbox').forEach(cb => {
+    cb.checked = checked;
+  });
+};
+</script>

@@ -1,0 +1,719 @@
+[
+  {
+    "id": "1766044083050-447",
+    "name": "vladimir",
+    "phone": "+38 (000) 000-03-80",
+    "email": "не вказано",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766044069490",
+        "name": "Електрочайник Philips",
+        "price": 800,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "800 грн",
+    "date": "18.12.2025, 09:48:03"
+  },
+  {
+    "id": "1766045549492-715",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766045539665",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 10:12:29"
+  },
+  {
+    "id": "1766045763377-352",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766045751489",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 10:16:03"
+  },
+  {
+    "id": "1766049769199-863",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766045751489",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      },
+      {
+        "id": "1766049751478",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "1270 грн",
+    "date": "18.12.2025, 11:22:49"
+  },
+  {
+    "id": "1766049836725-544",
+    "name": "vladimir",
+    "phone": "+38 (023) 241-24-24",
+    "email": "не вказано",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766049823041",
+        "name": "Мікрохвильова піч Samsung",
+        "price": 2999,
+        "quantity": 1,
+        "photo": "/imeiges/judo-307857_1280.webp"
+      }
+    ],
+    "total": "2999 грн",
+    "date": "18.12.2025, 11:23:56"
+  },
+  {
+    "id": "1766049960699-369",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766049948555",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 11:26:00"
+  },
+  {
+    "id": "1766050050779-937",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766050041520",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 11:27:30"
+  },
+  {
+    "id": "1766052265628-487",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766052245408",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:04:25"
+  },
+  {
+    "id": "1766052425259-707",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766052413119",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 12:07:05"
+  },
+  {
+    "id": "1766053413611-276",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766053398904",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:23:33"
+  },
+  {
+    "id": "1766053538431-148",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766053524625",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:25:38"
+  },
+  {
+    "id": "1766053579729-360",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "nova_poshta",
+    "city": "kiev",
+    "branch": "ppp",
+    "branchNumber": "10",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766053548544",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      },
+      {
+        "id": "1766053550192",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      },
+      {
+        "id": "1766053551343",
+        "name": "Штани для бігу",
+        "price": 780,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "2050 грн",
+    "date": "18.12.2025, 12:26:19"
+  },
+  {
+    "id": "1766054623773-670",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766054608558",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      },
+      {
+        "id": "1766054610784",
+        "name": "Штани для бігу",
+        "price": 780,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "1300 грн",
+    "date": "18.12.2025, 12:43:43"
+  },
+  {
+    "id": "1766054729922-112",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766054714997",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:45:29"
+  },
+  {
+    "id": "1766054798333-824",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766054783645",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:46:38"
+  },
+  {
+    "id": "1766054971578-971",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766054955452",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 12:49:31"
+  },
+  {
+    "id": "1766057126055-87",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766057110869",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 13:25:26"
+  },
+  {
+    "id": "1766057303728-279",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "liqpay",
+    "items": [
+      {
+        "id": "1766057110869",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      },
+      {
+        "id": "1766057271923",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "1040 грн",
+    "date": "18.12.2025, 13:28:23"
+  },
+  {
+    "id": "1766057328644-842",
+    "name": "3333333333",
+    "phone": "0232412424",
+    "email": "не вказано",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766057313886",
+        "name": "Штани для бігу",
+        "price": 780,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "780 грн",
+    "date": "18.12.2025, 13:28:48"
+  },
+  {
+    "id": "1766057478394-957",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766057464984",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 13:31:18"
+  },
+  {
+    "id": "1766059243808-662",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766059229019",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "18.12.2025, 14:00:43"
+  },
+  {
+    "id": "1766059699705-578",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766059683387",
+        "name": "Футболка біла",
+        "price": 500,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "500 грн",
+    "date": "18.12.2025, 14:08:19"
+  },
+  {
+    "id": "1766059779588-325",
+    "name": "3333333333",
+    "phone": "0232412424",
+    "email": "не вказано",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766059765146",
+        "name": "Штани для бігу",
+        "price": 780,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "780 грн",
+    "date": "18.12.2025, 14:09:39"
+  },
+  {
+    "id": "1766064007074-136",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766063993479",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 15:20:07"
+  },
+  {
+    "id": "1766064080034-533",
+    "name": "vladimir",
+    "phone": "+38 (023) 241-24-24",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766064068028",
+        "name": "Пилосос Xiaomi",
+        "price": 4500,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200511_161659.jpg"
+      }
+    ],
+    "total": "4500 грн",
+    "date": "18.12.2025, 15:21:20"
+  },
+  {
+    "id": "1766064098959-844",
+    "name": "vladimir",
+    "phone": "+38 (000) 000-03-80",
+    "email": "не вказано",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766064088276",
+        "name": "Електрочайник Philips",
+        "price": 800,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "800 грн",
+    "date": "18.12.2025, 15:21:38"
+  },
+  {
+    "id": "1766064125564-761",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766064110069",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "18.12.2025, 15:22:05"
+  },
+  {
+    "id": "1766128534130-716",
+    "name": "vladimir",
+    "phone": "+38 (023) 241-24-24",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766128521406",
+        "name": "Пилосос Xiaomi",
+        "price": 4500,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200511_161659.jpg"
+      }
+    ],
+    "total": "4500 грн",
+    "date": "19.12.2025, 09:15:34"
+  },
+  {
+    "id": "1766128554920-819",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766128545365",
+        "name": "Футболка з принтом",
+        "price": 520,
+        "quantity": 1,
+        "photo": "/imeiges/thumbnail_1763380142536.jpg"
+      }
+    ],
+    "total": "520 грн",
+    "date": "19.12.2025, 09:15:54"
+  },
+  {
+    "id": "1766132091254-123",
+    "name": "vladimir",
+    "phone": "+38 (023) 241-24-24",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766132069528",
+        "name": "Пилосос Xiaomi",
+        "price": 4500,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200511_161659.jpg"
+      }
+    ],
+    "total": "4500 грн",
+    "date": "19.12.2025, 10:14:51"
+  },
+  {
+    "id": "1766132117199-561",
+    "name": "xxxx",
+    "phone": "0999999999",
+    "email": "ghfgh@gmail.com",
+    "delivery": "ukr_poshta",
+    "city": "не вказано",
+    "branch": "не вказано",
+    "branchNumber": "не вказано",
+    "payment": "cod",
+    "items": [
+      {
+        "id": "1766132104559",
+        "name": "Спортивні штани чорні",
+        "price": 750,
+        "quantity": 1,
+        "photo": "/imeiges/IMG_20200501_202608.jpg"
+      }
+    ],
+    "total": "750 грн",
+    "date": "19.12.2025, 10:15:17"
+  }
+]
