@@ -1,0 +1,189 @@
+footer {
+    background-color: rgb(59, 73, 75);
+padding-top: 50px;
+padding-bottom: 20px;
+}
+
+footer.left {
+    width: 100%;
+    padding: 20px;
+    color: rgb(230, 230, 179);
+    font-size: 0.875em;
+    text-align: center;
+}
+footer.left figure figcaption {
+
+    color: rgb(230, 230, 179);
+    font-size: 0.875em;
+    margin-top: 25;
+}
+footer.left nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+footer.left nav a{
+    display: block;
+    color: rgb(230, 230, 179);
+    font-size: 0.875em;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+footer.left nav a:hover,footer.left nav a:active{
+    color: rgb(15, 175, 207);
+    text-decoration: underline;
+}
+
+
+
+footer .right > div {
+    text-align: center;
+    font-size: 0.875;
+    
+}
+
+
+
+
+footer .right form div{
+    justify-content: left;
+    width: 458px;
+    border-bottom: 1px solid ;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer .right form input[type="text"]{
+    padding: 8px 0;
+    width: 100%;
+    background: none;
+    border: none;
+}
+footer .right form input[type="submit"]{
+    width: 20px;
+    height: 20px;
+
+}
+footer .right > div{
+    text-align: center;
+    font-size: 0.875;
+    color: #fff;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+
+
+footer .right .box{
+    width: 7px;
+    height: 30px;
+    display: inline-flex;
+    margin-top: 31px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ footer .right .insta {
+    background: url("../imeiges/insta.png") no-repeat;
+
+}
+
+ footer .right .insta :hover{
+    background: url("../imeiges/insta-hover.png") no-repeat;
+    background-color: cover;
+    cursor: pointer;
+}
+footer .right .facebook{
+    background: url("../imeiges/facebook.png") no-repeat;
+}
+
+footer .right .facebook:hover{
+    background: url("../imeiges/facebook-hover.png") no-repeat;
+    background-color: cover;
+    cursor: pointer;
+}
+footer .right .youtube{
+    background: url("../imeiges/youtube.png") no-repeat;
+}
+
+footer .right .youtube:hover{
+    background: url("../imeiges/youtube-hover.png") no-repeat;
+    background-color: cover;
+    cursor: pointer;
+
+}
+footer .copy {
+    text-align: center;
+    color: bisque;
+    font-size: 0.750em;
+    margin-top: 60px;
+   
+}
+
+
+
+
+
+
+
+
