@@ -405,3 +405,625 @@ button:hover {
     text-align: center;
   }
 }
+
+
+
+
+
+
+
+
+/* ==================================================
+   AI AGENT 
+================================================== */
+
+:root {
+
+  --agent-primary: #667eea;
+  --agent-secondary: #764ba2;
+
+  --agent-bg: rgba(255,255,255,.9);
+
+  --agent-shadow:
+    0 25px 60px rgba(0,0,0,.18);
+
+}
+
+/* ==================================================
+   TOGGLE BUTTON
+================================================== */
+
+#agentToggle {
+
+  position: fixed;
+
+  
+  right: 20px;
+  bottom: 100px;
+
+
+
+  width: 64px;
+  height: 64px;
+
+  border: none;
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--agent-primary),
+      var(--agent-secondary)
+    );
+
+  color: #fff;
+
+  font-size: 28px;
+
+  cursor: pointer;
+
+  z-index: 9998;
+
+  box-shadow:
+    0 12px 35px rgba(102,126,234,.4);
+
+  transition: .3s;
+
+  animation:
+    pulseAgent 3s infinite;
+
+}
+
+#agentToggle:hover {
+
+  transform:
+    scale(1.08);
+
+}
+
+/* ==================================================
+   CHAT WINDOW
+================================================== */
+
+#agentWidget {
+
+  position: fixed;
+
+  right: 20px;
+  bottom: 95px;
+
+  width: 420px;
+
+  max-width: calc(100vw - 20px);
+
+  height: 80vh;
+
+  max-height: 760px;
+
+  display: none;
+  flex-direction: column;
+
+  background:
+    var(--agent-bg);
+
+  backdrop-filter:
+    blur(20px);
+
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  border-radius: 24px;
+
+  overflow: hidden;
+
+  box-shadow:
+    var(--agent-shadow);
+
+  border:
+    1px solid rgba(255,255,255,.4);
+
+  z-index: 9999;
+
+  animation:
+    widgetShow .25s ease;
+
+}
+
+@keyframes widgetShow {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(15px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+/* ==================================================
+   HEADER
+================================================== */
+
+#agentHeader {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 16px 18px;
+
+  flex-shrink: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--agent-primary),
+      var(--agent-secondary)
+    );
+
+  color: white;
+
+}
+
+.agent-status {
+
+  background:
+    rgba(255,255,255,.2);
+
+  padding: 5px 12px;
+
+  border-radius: 40px;
+
+  font-size: 12px;
+}
+
+#agentClose {
+
+  border: none;
+
+  background: transparent;
+
+  color: #fff;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+}
+
+#agentClose:hover {
+
+  transform:
+    scale(1.15);
+
+}
+
+/* ==================================================
+   CHAT AREA
+================================================== */
+
+#agentMessages {
+
+  flex: 1;
+
+  overflow-y: auto;
+
+  min-height: 0;
+
+  padding: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f8fafc,
+      #eef2ff
+    );
+
+  scroll-behavior: smooth;
+
+}
+
+#agentMessages::-webkit-scrollbar {
+
+  width: 8px;
+
+}
+
+#agentMessages::-webkit-scrollbar-thumb {
+
+  background:
+    rgba(102,126,234,.3);
+
+  border-radius: 20px;
+
+}
+
+/* ==================================================
+   BOT MESSAGE
+================================================== */
+
+.agent-message {
+
+  max-width: 85%;
+
+  background: white;
+
+  color: #334155;
+
+  padding: 14px 16px;
+
+  border-radius:
+    20px 20px 20px 6px;
+
+  margin-bottom: 12px;
+
+  line-height: 1.6;
+
+  word-break: break-word;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.08);
+
+  animation:
+    messageShow .25s ease;
+
+}
+
+/* ==================================================
+   USER MESSAGE
+================================================== */
+
+.user-message {
+
+  margin-left: auto;
+
+  max-width: 85%;
+
+  padding: 14px 16px;
+
+  margin-bottom: 12px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--agent-primary),
+      var(--agent-secondary)
+    );
+
+  border-radius:
+    20px 20px 6px 20px;
+
+  box-shadow:
+    0 6px 18px rgba(102,126,234,.25);
+
+  word-break: break-word;
+
+  animation:
+    messageShow .25s ease;
+
+}
+
+@keyframes messageShow {
+
+  from {
+
+    opacity: 0;
+
+    transform:
+      translateY(12px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform:
+      translateY(0);
+
+  }
+
+}
+
+/* ==================================================
+   INPUT SECTION
+================================================== */
+
+#agentInputWrap {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 12px;
+
+  background: white;
+
+  border-top:
+    1px solid #e5e7eb;
+
+}
+
+#agentInput {
+
+  flex: 1;
+
+  border: none;
+
+  outline: none;
+
+  background: #f1f5f9;
+
+  border-radius: 18px;
+
+  padding: 14px 18px;
+
+  font-size: 14px;
+
+  transition: .25s;
+
+}
+
+#agentInput:focus {
+
+  background: white;
+
+  box-shadow:
+    0 0 0 2px rgba(102,126,234,.25);
+
+}
+
+/* ==================================================
+   SEND BUTTON
+================================================== */
+
+#agentSend {
+
+  width: 110px;
+  height: 48px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--agent-primary),
+      var(--agent-secondary)
+    );
+
+  transition: .25s;
+
+}
+
+#agentSend:hover {
+
+  transform:
+    scale(1.05);
+
+}
+
+#agentSend:active {
+
+  transform:
+    scale(.96);
+
+}
+
+/* ==================================================
+   TYPING
+================================================== */
+
+.typing {
+
+  opacity: .7;
+
+  font-style: italic;
+
+  animation:
+    typingBlink 1s infinite;
+
+}
+
+@keyframes typingBlink {
+
+  50% {
+
+    opacity: .35;
+
+  }
+
+}
+
+/* ==================================================
+   FLOATING BUTTON ANIMATION
+================================================== */
+
+@keyframes pulseAgent {
+
+  0% {
+
+    box-shadow:
+      0 0 0 0 rgba(102,126,234,.4);
+
+  }
+
+  70% {
+
+    box-shadow:
+      0 0 0 20px rgba(102,126,234,0);
+
+  }
+
+  100% {
+
+    box-shadow:
+      0 0 0 0 rgba(102,126,234,0);
+
+  }
+
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 768px) {
+
+  #agentWidget {
+
+    left: 10px;
+    right: 10px;
+
+    width: auto;
+
+    height: 85vh;
+
+    border-radius: 20px;
+
+  }
+
+  #agentToggle {
+
+    left: 15px;
+    right: auto;
+
+    bottom: 15px
+
+  }
+
+}
+
+/* ==================================================
+   MOBILE FULLSCREEN
+================================================== */
+
+@media (max-width: 480px) {
+
+  #agentWidget {
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100dvh;
+
+    max-width: none;
+    max-height: none;
+
+    border-radius: 0;
+
+  }
+
+  #agentHeader {
+
+    height: 60px;
+
+    padding: 0 16px;
+
+  }
+
+  #agentMessages {
+
+    padding: 14px;
+
+  }
+
+  #agentInputWrap {
+
+    padding: 10px;
+
+  }
+
+  #agentInput {
+
+    font-size: 16px;
+  }
+
+  #agentSend {
+
+    width: 80px;
+
+    height: 46px;
+
+  }
+
+  .agent-message,
+  .user-message {
+
+    max-width: 95%;
+
+  }
+
+}
+
+/* ==================================================
+   DARK MODE (автоматично)
+================================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  #agentWidget {
+
+    background:
+      rgba(15,23,42,.92);
+
+  }
+
+  #agentMessages {
+
+    background:
+      linear-gradient(
+        180deg,
+        #0f172a,
+        #111827
+      );
+
+  }
+
+  .agent-message {
+
+    background:
+      #1e293b;
+
+    color:
+      #e2e8f0;
+
+  }
+
+  #agentInput {
+
+    background:
+      #1e293b;
+
+    color:
+      white;
+
+  }
+
+}
