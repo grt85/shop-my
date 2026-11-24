@@ -318,7 +318,7 @@ async function sendAgentMessage() {
 
     const response =
       await fetch(
-        'http://localhost:3000/api/chat',
+        'https://shop-my-86on.onrender.com/api/chat',
         {
           method: 'POST',
 
