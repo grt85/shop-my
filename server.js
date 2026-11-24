@@ -359,6 +359,55 @@ app.use((err, req, res, next) => {
   res.status(500).json({ success: false, message: "Server error" });
 });
 
+
+
+
+const { askAgent } = require('./agent/chat');
+
+app.post('/api/chat', async (req, res) => {
+
+  const start = Date.now();
+
+  try {
+
+    const { message = '' } = req.body;
+
+    console.log('\n════════════════════════════════════');
+    console.log('🤖 AGENT REQUEST');
+    console.log('💬 MESSAGE:', message);
+
+    const result =
+      await askAgent(message);
+
+    console.log('\n✅ AGENT RESPONSE');
+    console.log(result);
+
+    console.log(
+      `\n⏱️ TIME: ${Date.now() - start} ms`
+    );
+
+    console.log('════════════════════════════════════\n');
+
+    res.json(result);
+
+  } catch (error) {
+
+    console.error('\n❌ AGENT ERROR');
+    console.error(error);
+
+    console.log('════════════════════════════════════\n');
+
+    res.status(500).json({
+      answer:
+        '⚠️ Сталася помилка при обробці запиту.'
+    });
+
+  }
+
+});
+
+
+
 // 🚀 Запуск сервера
 app.listen(PORT, () => {
   console.log(`🚀 Сервер запущено на http://localhost:${PORT}`);
