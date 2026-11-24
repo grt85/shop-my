@@ -8,6 +8,55 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- AI Agent -->
+
+<div id="agentWidget">
+
+  <div id="agentHeader">
+
+    <span>🤖 Консультант магазину</span>
+
+    <button
+      id="agentClose"
+      type="button"
+      aria-label="Закрити чат"
+    >
+      ✕
+    </button>
+
+  </div>
+
+  <div id="agentMessages"></div>
+
+  <div id="agentInputWrap">
+
+    <input
+      type="text"
+      id="agentInput"
+      placeholder="Напишіть повідомлення..."
+    >
+
+    <button id="agentSend">
+      Надіслати
+    </button>
+
+  </div>
+
+</div>
+
+<button
+  id="agentToggle"
+  type="button"
+  title="AI Консультант"
+>
+  🤖
+</button>
+
+
+
+
+
+
 
  <header class="site-header">
   <img src="/imeiges/логотип для магазину.png" alt="Логотип магазину" class="logo">
@@ -189,6 +238,6 @@
 </div>
 
   <script src="script.js"></script>
- 
+ <script src="agent.js"></script>
 </body>
 </html>
