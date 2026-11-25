@@ -94,12 +94,12 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 // 🛒 Робота з корзиною
 let cart = { items: [], customer: {} };
-
+window.cart = cart;
 // Збереження у localStorage
 function saveCart() {
   localStorage.setItem('cart', JSON.stringify(cart));
 }
-
+window.saveCart = saveCart;
 // Завантаження з localStorage
 function loadCart() {
   const saved = localStorage.getItem("cart");
@@ -142,7 +142,8 @@ function refreshCartUI() {
       <span>${item.price} грн × ${item.quantity}</span>
       <button class="remove-btn">Видалити</button>
     `;
-
+window.refreshCartUI =
+  refreshCartUI;
     // кнопка видалення
     li.querySelector(".remove-btn").onclick = () => {
       cart.items.splice(index, 1);
