@@ -395,10 +395,13 @@ async function sendAgentMessage() {
 
     }
 
-    addAgentMessage(
-      data.answer ||
-      '🤖 Немає відповіді.'
-    );
+    const answer =
+  data.answer ||
+  '🤖 Немає відповіді.';
+
+addAgentMessage(answer);
+
+speakText(answer);
 
   } catch (error) {
 
@@ -412,5 +415,121 @@ async function sendAgentMessage() {
     );
 
   }
+
+}
+
+const voiceBtn =
+  document.getElementById(
+    'voiceBtn'
+  );
+
+if (voiceBtn) {
+
+  voiceBtn.addEventListener(
+    'click',
+    startVoiceRecognition
+  );
+
+}
+function startVoiceRecognition() {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+
+    alert(
+      'Браузер не підтримує голосовий ввід'
+    );
+
+    return;
+
+  }
+
+  const voiceBtn =
+    document.getElementById(
+      'voiceBtn'
+    );
+
+  const recognition =
+    new SpeechRecognition();
+
+  recognition.lang = 'uk-UA';
+
+  recognition.interimResults =
+    false;
+
+  recognition.maxAlternatives =
+    1;
+
+  voiceBtn?.classList.add(
+    'recording'
+  );
+
+  recognition.start();
+
+  recognition.onresult = event => {
+
+    const text =
+      event.results[0][0].transcript;
+
+    const input =
+      document.getElementById(
+        'agentInput'
+      );
+
+    if (input) {
+
+      input.value = text;
+
+    }
+
+    sendAgentMessage();
+
+  };
+
+  recognition.onerror = error => {
+
+    console.error(
+      'Voice error:',
+      error
+    );
+
+  };
+
+  recognition.onend = () => {
+
+    voiceBtn?.classList.remove(
+      'recording'
+    );
+
+  };
+
+}
+function speakText(text) {
+
+  if (
+    !window.speechSynthesis
+  ) return;
+
+  const speech =
+    new SpeechSynthesisUtterance(
+      text
+        .replace(/<br>/g, ' ')
+        .replace(/<[^>]*>/g, '')
+    );
+
+  speech.lang = 'uk-UA';
+
+  speech.rate = 1;
+
+  speech.pitch = 1;
+
+  window.speechSynthesis.cancel();
+
+  window.speechSynthesis.speak(
+    speech
+  );
 
 }
