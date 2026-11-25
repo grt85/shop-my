@@ -364,7 +364,7 @@ app.use((err, req, res, next) => {
 
 const { askAgent } = require('./agent/chat');
 
-app.post('https://shop-my-86on.onrender.com/api/chat', async (req, res) => {
+app.post('/api/chat', async (req, res) => {
 
   const start = Date.now();
 
