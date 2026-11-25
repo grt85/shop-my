@@ -263,7 +263,7 @@ function addProductToCart(product) {
 
       photo:
         product.photo ||
-        '/uploads/imeiges/логотип для магазину.png'
+        'imeiges/логотип для магазину.png'
     });
 
   }
