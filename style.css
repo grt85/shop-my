@@ -1027,3 +1027,57 @@ button:hover {
   }
 
 }
+
+#voiceBtn {
+
+  width: 48px;
+  height: 48px;
+
+  border: none;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  font-size: 20px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff4d6d,
+      #c9184a
+    );
+
+  transition: .25s;
+
+}
+
+#voiceBtn:hover {
+
+  transform: scale(1.05);
+
+}
+
+#voiceBtn.recording {
+
+  animation:
+    pulseVoice .8s infinite;
+
+}
+
+@keyframes pulseVoice {
+
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+
+}
