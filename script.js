@@ -142,8 +142,7 @@ function refreshCartUI() {
       <span>${item.price} грн × ${item.quantity}</span>
       <button class="remove-btn">Видалити</button>
     `;
-window.refreshCartUI =
-  refreshCartUI;
+
     // кнопка видалення
     li.querySelector(".remove-btn").onclick = () => {
       cart.items.splice(index, 1);
@@ -157,7 +156,7 @@ window.refreshCartUI =
   totalPriceModal.textContent = `Ітого: ${total} грн`;
   updateCartCount();
 }
-
+window.refreshCartUI = refreshCartUI;
 // Очистити кошик
 function clearCart() {
   cart.items = [];
